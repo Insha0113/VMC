@@ -1,0 +1,240 @@
+.aboutHeader {
+  position: relative;
+  background: linear-gradient(135deg, rgba(8, 113, 178, 0.9) 0%, rgba(149, 200, 62, 0.8) 100%), url('/images/doctor interaction.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 0;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: white;
+}
+
+.title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.historySection {
+  padding: 5rem 0;
+}
+
+.historyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.historyTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.historyTitle span {
+  color: var(--primary);
+}
+
+.historyText {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.historyVisual {
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  border: 1px solid rgba(8, 113, 178, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.timelineYear {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  width: 60px;
+}
+
+.timelineDesc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Mission & Vision Section */
+.missionVision {
+  background-color: var(--card-bg);
+  padding: 5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.mvGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.mvCard {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 2.5rem 2rem;
+  transition: var(--transition);
+  height: 100%;
+}
+
+.mvCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.mvIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.mvTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.mvDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Management Section */
+.mgmtSection {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, rgba(8, 113, 178, 0.05) 0%, rgba(149, 200, 62, 0.05) 100%);
+  border-top: 1px solid var(--border);
+}
+
+.mgmtHeader {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.mgmtTitle {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.mgmtSubtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mgmtGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.mgmtCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.mgmtCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-light);
+}
+
+.mgmtAvatar {
+  height: 220px;
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.mgmtAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mgmtInfo {
+  padding: 1.5rem;
+}
+
+.mgmtName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.mgmtRole {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.mgmtBio {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 992px) {
+  .historyGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .mvGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .mgmtGrid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

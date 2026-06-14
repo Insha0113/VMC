@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  width: 100%;
+}
+
+.ecgWrapper {
+  width: 100%;
+  max-width: 320px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ecgWrapper {
+    background-color: #1e293b;
+  }
+}
+
+.ecgSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ecgPath {
+  stroke-dasharray: 80 300;
+  stroke-dashoffset: 380;
+  animation: ecgSweep 1.8s linear infinite;
+}
+
+@keyframes ecgSweep {
+  0% {
+    stroke-dashoffset: 380;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.messageRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.heartIcon {
+  animation: heartbeat 1s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: center;
+}
+
+.message {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+}

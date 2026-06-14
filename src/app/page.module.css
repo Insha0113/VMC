@@ -1,0 +1,601 @@
+.hero {
+  position: relative;
+  background-color: #043f65;
+  padding: 8rem 0 12rem 0;
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Smooth gradient bottom fade */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 280px; /* Taller fade for smoother transition */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 40%, rgba(255, 255, 255, 0.8) 75%, var(--card-bg) 100%);
+  pointer-events: none;
+  z-index: 2; /* Sit on top of video and content background to blend them */
+}
+
+/* Curved shape divider styling - Hidden to blend hero smoothly with the next section */
+.curveDivider {
+  display: none;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  align-self: flex-start;
+  border: 1px solid rgba(8, 113, 178, 0.1);
+}
+
+.heroContent .badge {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.heroTitle span {
+  color: var(--accent);
+}
+
+.heroDesc {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.heroBtns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btnPrimary {
+  position: relative;
+  z-index: 1;
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.btnPrimary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: inherit;
+  opacity: 0.4;
+  z-index: -1;
+  animation: btn-pulse-animation 2s infinite ease-out;
+  pointer-events: none;
+}
+
+.heroContent .btnPrimary {
+  background-color: var(--accent);
+  color: #043f65;
+  font-weight: 700;
+  border: none;
+}
+
+.btnPrimary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 30px rgba(8, 113, 178, 0.4);
+}
+
+.heroContent .btnPrimary:hover {
+  background-color: var(--accent-hover);
+  box-shadow: 0 12px 30px rgba(149, 200, 62, 0.5);
+}
+
+@keyframes btn-pulse-animation {
+  0% {
+    transform: scale(0.96, 0.92);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.08, 1.22);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.96, 0.92);
+    opacity: 0;
+  }
+}
+
+.btnSecondary {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  padding: 1rem 2rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.heroContent .btnSecondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btnSecondary:hover {
+  background-color: var(--background);
+  transform: translateY(-2px);
+}
+
+.heroContent .btnSecondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.heroVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Custom interactive graphic mimicking a medical chart/dashboard overlay */
+.medicalGraphic {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+}
+
+.graphicHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.graphicIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--accent-light);
+  color: var(--accent-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graphicTitle {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.graphicSub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.graphicChart {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.chartBar {
+  flex: 1;
+  background: linear-gradient(to top, var(--primary) 0%, var(--accent) 100%);
+  border-radius: 4px 4px 0 0;
+  transition: var(--transition);
+  min-height: 20px;
+  animation: grow-bar 1.5s ease-out forwards;
+}
+
+@keyframes grow-bar {
+  from { height: 0; }
+}
+
+.graphicStats {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.statVal {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Services overview section */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.serviceCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-lg);
+}
+
+.serviceIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1.5rem auto;
+  transition: var(--transition);
+}
+
+.serviceCard:hover .serviceIcon {
+  background-color: var(--primary);
+  color: white;
+}
+
+.serviceTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.serviceDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Sections styling */
+.secHeader {
+  max-width: 600px;
+  margin: 0 auto 3.5rem auto;
+  text-align: center;
+}
+
+.secTitle {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.secDesc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Department highlight grid */
+.deptRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.deptCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.deptCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.deptVisual {
+  height: 250px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.deptBody {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.deptName {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.deptDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.deptFeatures {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.deptFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.deptLink {
+  margin-top: auto;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.deptLink:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Doctor grid */
+.docGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* Contact Section Grid */
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contactInfoCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.contactInfoTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contactRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.contactIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.contactDetails h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.contactDetails p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1200px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .docGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  /* Remove order: -1 so heroVisual appears after heroContent in mobile view */
+  .heroVisual {
+    order: 0;
+  }
+  .deptRow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+  .docGrid {
+    grid-template-columns: 1fr;
+  }
+  .heroBtns {
+    flex-direction: column;
+  }
+  .contactInfoCard {
+    padding: 1.5rem;
+  }
+}
+
+/* Doctor marquee styles */
+.docMarqueeContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  padding: 1.5rem 0;
+  background-color: var(--card-bg);
+}
+
+.docOverlayLeft,
+.docOverlayRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.docOverlayLeft {
+  left: 0;
+  background: linear-gradient(to right, var(--card-bg) 0%, transparent 100%);
+}
+
+.docOverlayRight {
+  right: 0;
+  background: linear-gradient(to left, var(--card-bg) 0%, transparent 100%);
+}
+
+.docMarqueeTrack {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: doc-marquee-scroll 40s linear infinite;
+  padding-left: 1rem;
+}
+
+.docMarqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+.docMarqueeCard {
+  width: 285px;
+  flex-shrink: 0;
+}
+
+@keyframes doc-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .docMarqueeCard {
+    width: 250px;
+  }
+  .docOverlayLeft,
+  .docOverlayRight {
+    width: 80px;
+  }
+}

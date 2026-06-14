@@ -1,0 +1,339 @@
+{
+  "doctors": [
+    {
+      "id": "doc-1",
+      "name": "Dr. Sarah Jenkins",
+      "specialty": "Senior Orthopedic Surgeon",
+      "department": "orthopedics",
+      "email": "sarah.jenkins@vmc.com",
+      "phone": "+1 (555) 019-2834",
+      "image": "/images/doc1.jpg",
+      "experience": "14+ Years",
+      "education": "MD, FACS - Johns Hopkins University",
+      "availability": [
+        "Monday",
+        "Wednesday",
+        "Thursday"
+      ],
+      "bio": "Dr. Jenkins specializes in joint reconstruction and minimally invasive arthroscopic surgeries. She is dedicated to helping patients return to their active lifestyles."
+    },
+    {
+      "id": "doc-2",
+      "name": "Dr. Michael Chen",
+      "specialty": "Pediatric Specialist",
+      "department": "pediatrics",
+      "email": "michael.chen@vmc.com",
+      "phone": "+1 (555) 019-3982",
+      "image": "/images/doc2.jpg",
+      "experience": "10+ Years",
+      "education": "MD - Harvard Medical School",
+      "availability": [
+        "Tuesday",
+        "Wednesday",
+        "Friday"
+      ],
+      "bio": "Dr. Chen is passionate about early childhood development and preventive care. He strives to make every clinic visit comfortable and stress-free for kids."
+    },
+    {
+      "id": "doc-3",
+      "name": "Dr. Emily Watson",
+      "specialty": "ENT Consultant",
+      "department": "ent",
+      "email": "emily.watson@vmc.com",
+      "phone": "+1 (555) 019-4721",
+      "image": "/images/doc3.jpg",
+      "experience": "12+ Years",
+      "education": "MD - University of California, San Francisco",
+      "availability": [
+        "Monday",
+        "Tuesday",
+        "Friday"
+      ],
+      "bio": "Dr. Watson has extensive expertise in endoscopic sinus surgery and pediatric otolaryngology. She is committed to providing evidence-based, compassionate care."
+    },
+    {
+      "id": "doc-4",
+      "name": "Dr. Robert Carter",
+      "specialty": "Sports Medicine & Joint Care",
+      "department": "orthopedics",
+      "email": "robert.carter@vmc.com",
+      "phone": "+1 (555) 019-5831",
+      "image": "/images/doc4.jpg",
+      "experience": "8+ Years",
+      "education": "MD - Stanford Medical School",
+      "availability": [
+        "Tuesday",
+        "Thursday",
+        "Friday"
+      ],
+      "bio": "Dr. Carter treats a wide range of athletic injuries, specializing in shoulder, hip, and knee reconstruction. He works closely with physical therapists to design personalized recovery programs."
+    },
+    {
+      "id": "doc-5",
+      "name": "Dr. Jessica Taylor",
+      "specialty": "Pediatric Cardiologist",
+      "department": "pediatrics",
+      "email": "jessica.taylor@vmc.com",
+      "phone": "+1 (555) 019-6294",
+      "image": "/images/doc5.jpg",
+      "experience": "15+ Years",
+      "education": "MD - Yale School of Medicine",
+      "availability": [
+        "Monday",
+        "Thursday"
+      ],
+      "bio": "Dr. Taylor specializes in pediatric heart conditions and congenital cardiac care, bringing advanced therapeutic solutions with a gentle touch."
+    },
+    {
+      "id": "doc-6",
+      "name": "Dr. David Kim",
+      "specialty": "Otology & Ear Specialist",
+      "department": "ent",
+      "email": "david.kim@vmc.com",
+      "phone": "+1 (555) 019-7235",
+      "image": "/images/doc6.jpg",
+      "experience": "9+ Years",
+      "education": "MD - Columbia University",
+      "availability": [
+        "Wednesday",
+        "Friday"
+      ],
+      "bio": "Dr. Kim is focused on hearing preservation, chronic ear infections, cochlear implants, and balance disorders. He utilizes precision micro-surgery techniques."
+    },
+    {
+      "id": "doc-7",
+      "name": "Dr. Lisa Anderson",
+      "specialty": "Spine Surgeon",
+      "department": "orthopedics",
+      "email": "lisa.anderson@vmc.com",
+      "phone": "+1 (555) 019-8239",
+      "image": "/images/doc7.jpg",
+      "experience": "16+ Years",
+      "education": "MD - University of Pennsylvania",
+      "availability": [
+        "Wednesday",
+        "Thursday"
+      ],
+      "bio": "Dr. Anderson is a world-renowned expert in spinal deformity correction, herniated discs, spinal fusion, and motion-preserving spine surgeries."
+    },
+    {
+      "id": "doc-8",
+      "name": "Dr. James Wilson",
+      "specialty": "General Pediatrician",
+      "department": "pediatrics",
+      "email": "james.wilson@vmc.com",
+      "phone": "+1 (555) 019-9284",
+      "image": "/images/doc8.jpg",
+      "experience": "11+ Years",
+      "education": "MD - Duke University School of Medicine",
+      "availability": [
+        "Tuesday",
+        "Thursday"
+      ],
+      "bio": "Dr. Wilson provides comprehensive care for infants, children, and teens. He has a special interest in asthma management and childhood nutrition counseling."
+    },
+    {
+      "id": "doc-9",
+      "name": "Dr. Olivia Martinez",
+      "specialty": "Rhinology & Sinus Expert",
+      "department": "ent",
+      "email": "olivia.martinez@vmc.com",
+      "phone": "+1 (555) 019-1038",
+      "image": "/images/doc9.jpg",
+      "experience": "13+ Years",
+      "education": "MD - Northwestern University",
+      "availability": [
+        "Monday",
+        "Wednesday"
+      ],
+      "bio": "Dr. Martinez specializes in complex sinus disorders, nasal airway obstruction, allergy treatments, and advanced endoscopic skull base surgeries."
+    },
+    {
+      "id": "doc-10",
+      "name": "Dr. William Thomas",
+      "specialty": "Orthopedic Trauma Specialist",
+      "department": "orthopedics",
+      "email": "william.thomas@vmc.com",
+      "phone": "+1 (555) 019-2047",
+      "image": "/images/doc10.jpg",
+      "experience": "12+ Years",
+      "education": "MD - University of Chicago",
+      "availability": [
+        "Monday",
+        "Friday"
+      ],
+      "bio": "Dr. Thomas treats complex fractures, non-unions, and bone infections. He is dedicated to helping patients recover optimal function after severe traumatic injuries."
+    },
+    {
+      "id": "doc-11",
+      "name": "Dr. Sophia Patel",
+      "specialty": "Pediatric Allergist & Immunologist",
+      "department": "pediatrics",
+      "email": "sophia.patel@vmc.com",
+      "phone": "+1 (555) 019-3058",
+      "image": "/images/doc11.jpg",
+      "experience": "7+ Years",
+      "education": "MD - Cornell University",
+      "availability": [
+        "Tuesday",
+        "Friday"
+      ],
+      "bio": "Dr. Patel helps kids manage eczema, food allergies, environmental allergies, and immune disorders. She is dedicated to improving quality of life for families."
+    }
+  ],
+  "departments": [
+    {
+      "id": "dept-1",
+      "slug": "orthopedics",
+      "name": "Orthopedics",
+      "description": "Comprehensive care for bones, joints, ligaments, tendons, and muscles. Our experts utilize state-of-the-art diagnostic and surgical techniques to restore your mobility.",
+      "services": [
+        "Joint Replacement Surgery (Hip & Knee)",
+        "Arthroscopic Surgery & Sports Medicine",
+        "Fracture and Trauma Management",
+        "Spine Care & Rehabilitation",
+        "Pediatric Orthopedics"
+      ],
+      "icon": "Bone"
+    },
+    {
+      "id": "dept-2",
+      "slug": "pediatrics",
+      "name": "Pediatrics",
+      "description": "Dedicated to the physical, emotional, and social health of infants, children, adolescents, and young adults. We provide a warm, child-friendly environment.",
+      "services": [
+        "Well-child Checks & Immunizations",
+        "Developmental Screening",
+        "Pediatric Acute Care",
+        "Childhood Asthma & Allergy Management",
+        "Nutritional Counseling"
+      ],
+      "icon": "Baby"
+    },
+    {
+      "id": "dept-3",
+      "slug": "ent",
+      "name": "ENT (Otolaryngology)",
+      "description": "Expert medical and surgical evaluation and treatment of ear, nose, throat, and head & neck disorders for both adults and children.",
+      "services": [
+        "Hearing Loss & Tinnitus Evaluation",
+        "Sinusitis & Allergy Management",
+        "Tonsillectomy & Adenoidectomy",
+        "Voice & Swallowing Disorders",
+        "Sleep Apnea & Snoring Treatment"
+      ],
+      "icon": "Activity"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "book-1",
+      "patientName": "Jane Smith",
+      "patientEmail": "jane.smith@example.com",
+      "patientPhone": "+1 (555) 012-3456",
+      "department": "orthopedics",
+      "doctorId": "doc-1",
+      "doctorName": "Dr. Sarah Jenkins",
+      "date": "2026-06-16",
+      "time": "10:00 AM",
+      "symptoms": "Knee pain after running last week.",
+      "status": "approved",
+      "createdAt": "2026-06-12T21:28:04.671Z"
+    },
+    {
+      "id": "book-2",
+      "patientName": "Tommy Brown",
+      "patientEmail": "parent.brown@example.com",
+      "patientPhone": "+1 (555) 098-7654",
+      "department": "pediatrics",
+      "doctorId": "doc-2",
+      "doctorName": "Dr. Michael Chen",
+      "date": "2026-06-17",
+      "time": "02:30 PM",
+      "symptoms": "Annual well-child checkup and school vaccinations.",
+      "status": "pending",
+      "createdAt": "2026-06-12T21:28:04.671Z"
+    },
+    {
+      "id": "book-1781353847688",
+      "patientName": "insha",
+      "patientEmail": "inshanouri@gmail.com",
+      "patientPhone": "+9117736262992",
+      "department": "pediatrics",
+      "doctorId": "doc-2",
+      "doctorName": "Dr. Michael Chen",
+      "date": "2026-06-12",
+      "time": "09:00 AM",
+      "symptoms": "gdhf",
+      "status": "completed",
+      "createdAt": "2026-06-13T12:30:47.688Z"
+    }
+  ],
+  "enquiries": [
+    {
+      "id": "enq-1",
+      "name": "Alice Johnson",
+      "email": "alice.j@example.com",
+      "phone": "+1 (555) 234-5678",
+      "subject": "Insurance Coverage Question",
+      "message": "Hello, I would like to know if you accept Blue Cross Blue Shield insurance for outpatient orthopedic checkups. Thank you.",
+      "createdAt": "2026-06-12T21:28:04.671Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-1",
+      "name": "Rajesh Kumar",
+      "role": "Orthopedics Patient",
+      "rating": 5,
+      "text": "The care and attention I received at VMC Medical Center was outstanding. The orthopedic team helped me get back on my feet after my knee surgery. Highly recommended!",
+      "avatarColor": "#0871B2",
+      "createdAt": "2026-06-14T01:49:05.615Z"
+    },
+    {
+      "id": "rev-2",
+      "name": "Priya Sharma",
+      "role": "Pediatrics (Mother of two)",
+      "rating": 5,
+      "text": "Dr. Michael Chen is an exceptional pediatrician. He is so patient with my kids and always takes the time to explain everything. The virtual support chat also helped us schedule easily!",
+      "avatarColor": "#95C83E",
+      "createdAt": "2026-06-14T01:49:05.615Z"
+    },
+    {
+      "id": "rev-3",
+      "name": "Amit Verma",
+      "role": "ENT Patient",
+      "rating": 5,
+      "text": "I had a chronic sinus issue that other clinics couldn't resolve, but the ENT specialists at VMC diagnosed and treated it effectively. The facility is state-of-the-art.",
+      "avatarColor": "#f59e0b",
+      "createdAt": "2026-06-14T01:49:05.615Z"
+    },
+    {
+      "id": "rev-4",
+      "name": "Thomas Mathew",
+      "role": "Outpatient Clinic",
+      "rating": 5,
+      "text": "Excellent customer service and very clean facility. The outpatient department was prompt, and the diagnostic reports were delivered on the same day. Very professional.",
+      "avatarColor": "#10b981",
+      "createdAt": "2026-06-14T01:49:05.615Z"
+    },
+    {
+      "id": "rev-5",
+      "name": "Deepa Nair",
+      "role": "Cardiology Consult",
+      "rating": 5,
+      "text": "High quality treatment and extremely supportive nursing staff. The booking process was seamless, and the doctor took time to answer all my questions patiently.",
+      "avatarColor": "#3b82f6",
+      "createdAt": "2026-06-14T01:49:05.615Z"
+    },
+    {
+      "id": "rev-1781401830553",
+      "name": "insha",
+      "role": "ent",
+      "rating": 5,
+      "text": "excellent service and treatment",
+      "avatarColor": "#10B981",
+      "createdAt": "2026-06-14T01:50:30.553Z"
+    }
+  ]
+}
