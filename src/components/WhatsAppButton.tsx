@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './WhatsAppButton.module.css';
 
 export default function WhatsAppButton() {
-  const phoneNumber = '917736262992';
+  const phoneNumber = '919526861588';
   // Standard WhatsApp API URL that redirects to chat with custom text
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=Hi!%20I%20have%20an%20inquiry%20about%20VMC%20Medical%20Center.`;
 
