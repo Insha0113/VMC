@@ -22,6 +22,7 @@ export default function HeroVideo() {
       autoPlay
       muted
       playsInline
+      className="hero-video-el"
       onEnded={handleVideoEnded}
       style={{
         position: 'absolute',
@@ -29,7 +30,6 @@ export default function HeroVideo() {
         left: 0,
         width: '100%',
         height: '100%',
-        objectFit: 'cover',
         zIndex: 0,
         opacity: 0.45, // More transparent
         pointerEvents: 'none'

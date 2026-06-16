@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { getDepartments } from '@/lib/db';
 import { CheckCircle2, ArrowRight, Calendar } from 'lucide-react';
 import styles from './departments.module.css';
+import BackButton from '@/components/BackButton';
 
 const deptImages: Record<string, string> = {
   pediatrics: '/images/pediatric.jpg',
   ent: '/images/ent.jpg',
-  orthopedics: '/images/orthopedics image.jpg'
+  orthopedics: '/images/orthopedics image.jpg',
+  dermatology: '/images/dermatology.jpg'
 };
 
 export default async function DepartmentsPage() {
@@ -20,13 +22,13 @@ export default async function DepartmentsPage() {
       <section 
         className={styles.header}
         style={{
-          minHeight: 'calc(100vh - 80px)',
+          minHeight: 'var(--header-min-height, 75vh)',
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
           background: 'none',
-          padding: 0,
+          padding: '2.5rem 0',
           backgroundColor: '#043f65'
         }}
       >
@@ -51,11 +53,24 @@ export default async function DepartmentsPage() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 100%)',
+            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 60%, rgba(149, 200, 62, 0.25) 100%)',
             zIndex: 2
           }}
         />
-        <div className="container" style={{ position: 'relative', zIndex: 3 }}>
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '120px',
+            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(149, 200, 62, 0.08) 35%, rgba(149, 200, 62, 0.2) 70%, var(--background) 100%)',
+            pointerEvents: 'none',
+            zIndex: 3
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 4 }}>
+          <BackButton />
           <h1 className={styles.title}>Medical Departments</h1>
           <p className={styles.subtitle}>
             Explore our specialized clinical centers, state-of-the-art diagnostics, and experienced medical team.
@@ -68,7 +83,22 @@ export default async function DepartmentsPage() {
         <div className="container">
           <div className={styles.deptListGrid}>
             {departments.map((dept) => (
-              <div key={dept.id} className={styles.deptListItem}>
+              <div key={dept.id} className={styles.deptListItem} style={{ position: 'relative' }}>
+                {/* Entire Card Absolute Overlay Link */}
+                <Link 
+                  href={`/departments/${dept.slug}`} 
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 1,
+                    cursor: 'pointer'
+                  }}
+                  aria-label={`Explore ${dept.name} Department`}
+                />
+
                 {/* Visual Banner */}
                 <div 
                   className={styles.deptVisual}
@@ -83,7 +113,9 @@ export default async function DepartmentsPage() {
 
                 {/* Details */}
                 <div className={styles.deptInfo}>
-                  <h2 className={styles.deptName}>{dept.name}</h2>
+                  <h2 className={styles.deptName}>
+                    {dept.name}
+                  </h2>
                   <p className={styles.deptDesc}>{dept.description}</p>
                   
                   <div>
@@ -99,7 +131,7 @@ export default async function DepartmentsPage() {
                   </div>
 
                   {/* Buttons */}
-                  <div className={styles.btnRow}>
+                  <div className={styles.btnRow} style={{ position: 'relative', zIndex: 2 }}>
                     <Link href={`/departments/${dept.slug}`} className={styles.btnExplore}>
                       Explore Department & Staff <ArrowRight size={16} />
                     </Link>

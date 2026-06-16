@@ -12,11 +12,25 @@ import { Doctor, Department, Booking } from '@/lib/db';
 import styles from './page.module.css';
 import ECGLoader from '@/components/ECGLoader';
 
+const CLINICAL_SERVICES = [
+  { id: 'home-visit', name: 'Home Visit', desc: 'Get professional medical consults and nursing support at home.' },
+  { id: 'usg', name: 'USG', desc: 'Advanced Ultrasonography and diagnostic scan.' },
+  { id: 'ecg', name: 'ECG', desc: 'Quick and precise Electrocardiogram heart screening.' },
+  { id: 'x-ray', name: 'X-Ray', desc: 'High-resolution digital skeletal imaging.' },
+  { id: 'pharmacy', name: 'Pharmacy', desc: 'In-house pharmacy for immediate prescription fulfillment.' },
+  { id: 'diabetic-care', name: 'Diabetic Care', desc: 'Blood sugar check, diabetic profiling and guidance.' },
+  { id: 'lab', name: 'Lab', desc: 'Comprehensive diagnostic blood and urine analysis.' }
+];
+
 export default function BookingForm() {
   const searchParams = useSearchParams();
   
   // Step tracker (1: Specialty/Staff, 2: Scheduling, 3: Patient Info, 4: Confirm)
   const [step, setStep] = useState(1);
+  
+  // Booking Type (consultation or service)
+  const [bookingType, setBookingType] = useState<'consultation' | 'service'>('consultation');
+  const [selectedService, setSelectedService] = useState<string>('');
   
   // Database lists loaded dynamically
   const [departments, setDepartments] = useState<Department[]>([]);
@@ -58,17 +72,34 @@ export default function BookingForm() {
         setDoctors(docsData);
 
         // Pre-fill parameters if present in URL
+        const typeParam = searchParams.get('type');
+        const serviceParam = searchParams.get('service');
         const deptParam = searchParams.get('dept');
         const docParam = searchParams.get('doctor');
 
-        if (deptParam) {
-          setSelectedDept(deptParam.toLowerCase());
-        }
-        if (docParam && docsData.length > 0) {
-          const doc = docsData.find((d: Doctor) => d.id === docParam);
-          if (doc) {
-            setSelectedDoctor(doc);
-            setSelectedDept(doc.department.toLowerCase());
+        if (typeParam === 'service') {
+          setBookingType('service');
+          setSelectedDept('Clinical Services');
+          if (serviceParam) {
+            const matchedService = CLINICAL_SERVICES.find(
+              s => s.name.toLowerCase() === serviceParam.toLowerCase() || s.id === serviceParam.toLowerCase()
+            );
+            if (matchedService) {
+              setSelectedService(matchedService.name);
+            } else {
+              setSelectedService(serviceParam);
+            }
+          }
+        } else {
+          if (deptParam) {
+            setSelectedDept(deptParam.toLowerCase());
+          }
+          if (docParam && docsData.length > 0) {
+            const doc = docsData.find((d: Doctor) => d.id === docParam);
+            if (doc) {
+              setSelectedDoctor(doc);
+              setSelectedDept(doc.department.toLowerCase());
+            }
           }
         }
       } catch (err) {
@@ -107,6 +138,11 @@ export default function BookingForm() {
   };
 
   const isDoctorAvailableOnDate = () => {
+    if (bookingType === 'service') {
+      if (!selectedDate) return true;
+      const day = getDayName(selectedDate);
+      return day !== 'Sunday';
+    }
     if (!selectedDoctor || !selectedDate) return true;
     const day = getDayName(selectedDate);
     return selectedDoctor.availability.includes(day);
@@ -120,7 +156,9 @@ export default function BookingForm() {
 
   // Submit Booking to API
   const handleConfirmBooking = async () => {
-    if (!selectedDoctor || !selectedDept || !selectedDate || !selectedSlot) return;
+    if (bookingType === 'consultation' && (!selectedDoctor || !selectedDept)) return;
+    if (bookingType === 'service' && !selectedService) return;
+    if (!selectedDate || !selectedSlot) return;
     setSubmitting(true);
     setErrorMsg('');
 
@@ -128,9 +166,9 @@ export default function BookingForm() {
       patientName: patientData.name,
       patientEmail: patientData.email,
       patientPhone: patientData.phone,
-      department: selectedDept,
-      doctorId: selectedDoctor.id,
-      doctorName: selectedDoctor.name,
+      department: bookingType === 'service' ? 'Clinical Services' : selectedDept,
+      doctorId: bookingType === 'service' ? 'service-generic' : (selectedDoctor?.id || ''),
+      doctorName: bookingType === 'service' ? selectedService : (selectedDoctor?.name || ''),
       date: selectedDate,
       time: selectedSlot,
       symptoms: patientData.symptoms
@@ -214,7 +252,7 @@ export default function BookingForm() {
               <li>Please arrive 15 minutes prior to your scheduled slot.</li>
               <li>Bring a valid ID card and past medical history / scan reports if any.</li>
               <li>A confirmation notice has been sent to <strong>{bookingResult.patientEmail}</strong>.</li>
-              <li>If you need to reschedule, call us at +1 (555) 019-8621.</li>
+              <li>If you need to reschedule, call us at <a href="tel:9947653954" style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'underline' }}>9947653954</a>.</li>
             </ul>
           </div>
 
@@ -223,8 +261,16 @@ export default function BookingForm() {
             style={{ width: '100%', padding: '1rem', marginTop: '1rem' }}
             onClick={() => {
               setStep(1);
-              setSelectedDept('');
+              const typeParam = searchParams.get('type');
+              if (typeParam === 'service') {
+                setBookingType('service');
+                setSelectedDept('Clinical Services');
+              } else {
+                setBookingType('consultation');
+                setSelectedDept('');
+              }
               setSelectedDoctor(null);
+              setSelectedService('');
               setSelectedDate('');
               setSelectedSlot('');
               setPatientData({ name: '', email: '', phone: '', symptoms: '' });
@@ -251,58 +297,83 @@ export default function BookingForm() {
       {/* Step Contents */}
       {step === 1 && (
         <div className={styles.stepCard}>
-          <h2 className={styles.stepTitle}>Select Department & Specialist</h2>
-          
-          <p className={styles.label} style={{ marginBottom: '0.75rem' }}>Select Specialty Department *</p>
-          <div className={styles.gridSelect}>
-            {departments.map((dept) => (
-              <button
-                key={dept.id}
-                type="button"
-                className={`${styles.cardSelect} ${selectedDept === dept.slug ? styles.cardSelectActive : ''}`}
-                onClick={() => handleDeptSelect(dept.slug)}
-              >
-                <div className={styles.cardSelectTitle}>{dept.name}</div>
-                <div className={styles.cardSelectDesc}>View clinical experts</div>
-              </button>
-            ))}
-          </div>
-
-          {selectedDept && (
+          {bookingType === 'service' ? (
             <>
-              <p className={styles.label} style={{ marginBottom: '0.75rem', marginTop: '1.5rem' }}>Select Available Doctor *</p>
-              {filteredDoctors.length === 0 ? (
-                <p style={{ color: 'var(--text-muted)' }}>No doctors available in this department right now.</p>
-              ) : (
-                <div className={styles.docGridSelect}>
-                  {filteredDoctors.map((doc) => (
-                    <button
-                      key={doc.id}
-                      type="button"
-                      className={`${styles.docCardSelect} ${selectedDoctor?.id === doc.id ? styles.docCardSelectActive : ''}`}
-                      onClick={() => {
-                        setSelectedDoctor(doc);
-                        setSelectedSlot(''); // Reset slot on doctor change
-                      }}
-                    >
-                      <img
-                        src={doc.image}
-                        alt={doc.name}
-                        className={styles.docAvatarImg}
-                        onError={(e) => {
-                          e.currentTarget.src = '/images/doc1.jpg';
-                        }}
-                      />
-                      <div>
-                        <div className={styles.docCardName}>{doc.name}</div>
-                        <div className={styles.docCardSub}>{doc.specialty}</div>
-                        <div className={styles.docCardSub} style={{ color: 'var(--accent-dark)', fontWeight: 'bold' }}>
-                          Avail: {doc.availability.join(', ')}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+              <h2 className={styles.stepTitle}>Select Clinical Service</h2>
+              <p className={styles.label} style={{ marginBottom: '0.75rem' }}>Choose Clinical Service *</p>
+              <div className={styles.gridSelect}>
+                {CLINICAL_SERVICES.map((srv) => (
+                  <button
+                    key={srv.id}
+                    type="button"
+                    className={`${styles.cardSelect} ${selectedService === srv.name ? styles.cardSelectActive : ''}`}
+                    onClick={() => {
+                      setSelectedService(srv.name);
+                      setSelectedDept('Clinical Services');
+                    }}
+                  >
+                    <div className={styles.cardSelectTitle}>{srv.name}</div>
+                    <div className={styles.cardSelectDesc}>{srv.desc}</div>
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className={styles.stepTitle}>Select Department & Specialist</h2>
+              
+              <p className={styles.label} style={{ marginBottom: '0.75rem' }}>Select Specialty Department *</p>
+              <div className={styles.gridSelect}>
+                {departments.map((dept) => (
+                  <button
+                    key={dept.id}
+                    type="button"
+                    className={`${styles.cardSelect} ${selectedDept === dept.slug ? styles.cardSelectActive : ''}`}
+                    onClick={() => handleDeptSelect(dept.slug)}
+                  >
+                    <div className={styles.cardSelectTitle}>{dept.name}</div>
+                    <div className={styles.cardSelectDesc}>View clinical experts</div>
+                  </button>
+                ))}
+              </div>
+
+              {selectedDept && (
+                <>
+                  <p className={styles.label} style={{ marginBottom: '0.75rem', marginTop: '1.5rem' }}>Select Available Doctor *</p>
+                  {filteredDoctors.length === 0 ? (
+                    <p style={{ color: 'var(--text-muted)' }}>No doctors available in this department right now.</p>
+                  ) : (
+                    <div className={styles.docGridSelect}>
+                      {filteredDoctors.map((doc) => (
+                        <button
+                          key={doc.id}
+                          type="button"
+                          className={`${styles.docCardSelect} ${selectedDoctor?.id === doc.id ? styles.docCardSelectActive : ''}`}
+                          onClick={() => {
+                            setSelectedDoctor(doc);
+                            setSelectedSlot(''); // Reset slot on doctor change
+                          }}
+                        >
+                          <img
+                            src={doc.image}
+                            alt={doc.name}
+                            className={styles.docAvatarImg}
+                            onError={(e) => {
+                              e.currentTarget.src = '/images/doc1.jpg';
+                            }}
+                          />
+                          <div>
+                            <div className={styles.docCardName}>{doc.name}</div>
+                            <div className={styles.docCardSub}>{doc.specialty}</div>
+                            <div className={styles.docCardSub} style={{ color: 'var(--accent-dark)', fontWeight: 'bold' }}>
+                              Avail: {doc.availability.join(', ')}
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}
@@ -312,7 +383,7 @@ export default function BookingForm() {
             <button
               type="button"
               className={styles.btnNext}
-              disabled={!selectedDept || !selectedDoctor}
+              disabled={bookingType === 'service' ? !selectedService : (!selectedDept || !selectedDoctor)}
               onClick={() => setStep(2)}
             >
               Continue to Scheduling <ArrowRight size={18} />
@@ -321,7 +392,7 @@ export default function BookingForm() {
         </div>
       )}
 
-      {step === 2 && selectedDoctor && (
+      {step === 2 && (bookingType === 'service' || selectedDoctor) && (
         <div className={styles.stepCard}>
           <h2 className={styles.stepTitle}>Choose Date & Time Slot</h2>
           
@@ -341,22 +412,40 @@ export default function BookingForm() {
                 }}
               />
               
-              <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                <h4 style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--primary)' }}>
-                  <Info size={16} /> Specialist Schedule
-                </h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                  <strong>{selectedDoctor.name}</strong> is available on: <br />
-                  <span style={{ fontWeight: 'bold', color: 'var(--foreground)' }}>
-                    {selectedDoctor.availability.join(', ')}
-                  </span>
-                </p>
-                {selectedDate && (
-                  <p style={{ fontSize: '0.8rem', marginTop: '6px', color: isDoctorAvailableOnDate() ? 'var(--success)' : 'var(--error)', fontWeight: 'bold' }}>
-                    Selected date is a {getDayName(selectedDate)} ({isDoctorAvailableOnDate() ? 'Doctor Available' : 'Doctor NOT Available'})
+              {bookingType === 'service' ? (
+                <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                  <h4 style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--primary)' }}>
+                    <Info size={16} /> Service Schedule
+                  </h4>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                    Clinical services are available Monday through Saturday.
                   </p>
-                )}
-              </div>
+                  {selectedDate && (
+                    <p style={{ fontSize: '0.8rem', marginTop: '6px', color: isDoctorAvailableOnDate() ? 'var(--success)' : 'var(--error)', fontWeight: 'bold' }}>
+                      Selected day: {getDayName(selectedDate)} ({isDoctorAvailableOnDate() ? 'Available' : 'NOT Available'})
+                    </p>
+                  )}
+                </div>
+              ) : (
+                selectedDoctor && (
+                  <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                    <h4 style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--primary)' }}>
+                      <Info size={16} /> Specialist Schedule
+                    </h4>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                      <strong>{selectedDoctor.name}</strong> is available on: <br />
+                      <span style={{ fontWeight: 'bold', color: 'var(--foreground)' }}>
+                        {selectedDoctor.availability.join(', ')}
+                      </span>
+                    </p>
+                    {selectedDate && (
+                      <p style={{ fontSize: '0.8rem', marginTop: '6px', color: isDoctorAvailableOnDate() ? 'var(--success)' : 'var(--error)', fontWeight: 'bold' }}>
+                        Selected date is a {getDayName(selectedDate)} ({isDoctorAvailableOnDate() ? 'Doctor Available' : 'Doctor NOT Available'})
+                      </p>
+                    )}
+                  </div>
+                )
+              )}
             </div>
 
             {/* Right Col: Time Slots */}
@@ -440,13 +529,13 @@ export default function BookingForm() {
                 className={styles.input}
                 value={patientData.phone}
                 onChange={handleInputChange}
-                placeholder="+1 (555) 000-0000"
+                placeholder="+91 99999 99999"
               />
             </div>
           </div>
 
           <div className={styles.inputGroup}>
-            <label className={styles.label} htmlFor="symptoms">Symptoms & Additional Notes *</label>
+            <label className={styles.label} htmlFor="symptoms">{bookingType === 'service' ? 'Service Address & Additional Notes *' : 'Symptoms & Additional Notes *'}</label>
             <textarea
               id="symptoms"
               name="symptoms"
@@ -456,7 +545,7 @@ export default function BookingForm() {
               style={{ resize: 'vertical' }}
               value={patientData.symptoms}
               onChange={handleInputChange}
-              placeholder="Describe symptoms briefly (e.g. chronic sore throat for 3 days)"
+              placeholder={bookingType === 'service' ? "Enter home address for Home Visit, or list specific scan requirements and notes here." : "Describe symptoms briefly (e.g. chronic sore throat for 3 days)"}
             />
           </div>
 
@@ -476,7 +565,7 @@ export default function BookingForm() {
         </div>
       )}
 
-      {step === 4 && selectedDoctor && (
+      {step === 4 && (bookingType === 'service' || selectedDoctor) && (
         <div className={styles.stepCard}>
           <h2 className={styles.stepTitle}>Review & Confirm Appointment</h2>
           
@@ -499,14 +588,31 @@ export default function BookingForm() {
               <span className={styles.receiptLabel}>Contact Phone</span>
               <span className={styles.receiptValue}>{patientData.phone}</span>
             </div>
-            <div className={styles.receiptRow}>
-              <span className={styles.receiptLabel}>Medical Specialty</span>
-              <span className={styles.receiptValue}>{selectedDept.toUpperCase()}</span>
-            </div>
-            <div className={styles.receiptRow}>
-              <span className={styles.receiptLabel}>Consultant Specialist</span>
-              <span className={styles.receiptValue}>{selectedDoctor.name}</span>
-            </div>
+            {bookingType === 'service' ? (
+              <>
+                <div className={styles.receiptRow}>
+                  <span className={styles.receiptLabel}>Booking Category</span>
+                  <span className={styles.receiptValue}>Clinical Services</span>
+                </div>
+                <div className={styles.receiptRow}>
+                  <span className={styles.receiptLabel}>Selected Service</span>
+                  <span className={styles.receiptValue}>{selectedService}</span>
+                </div>
+              </>
+            ) : (
+              selectedDoctor && (
+                <>
+                  <div className={styles.receiptRow}>
+                    <span className={styles.receiptLabel}>Medical Specialty</span>
+                    <span className={styles.receiptValue}>{selectedDept.toUpperCase()}</span>
+                  </div>
+                  <div className={styles.receiptRow}>
+                    <span className={styles.receiptLabel}>Consultant Specialist</span>
+                    <span className={styles.receiptValue}>{selectedDoctor.name}</span>
+                  </div>
+                </>
+              )
+            )}
             <div className={styles.receiptRow}>
               <span className={styles.receiptLabel}>Date of Consult</span>
               <span className={styles.receiptValue}>{selectedDate}</span>
@@ -516,7 +622,7 @@ export default function BookingForm() {
               <span className={styles.receiptValue}>{selectedSlot}</span>
             </div>
             <div className={styles.receiptRow} style={{ borderBottom: 'none', paddingBottom: 0 }}>
-              <span className={styles.receiptLabel}>Reported Symptoms</span>
+              <span className={styles.receiptLabel}>{bookingType === 'service' ? 'Service Notes / Address' : 'Reported Symptoms'}</span>
               <span className={styles.receiptValue} style={{ maxWidth: '400px', wordBreak: 'break-word', textAlign: 'right' }}>{patientData.symptoms}</span>
             </div>
           </div>

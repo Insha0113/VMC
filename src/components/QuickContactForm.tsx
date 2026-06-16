@@ -123,7 +123,7 @@ export default function QuickContactForm() {
             className={styles.input}
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+1 (555) 000-0000"
+            placeholder="+91 99999 99999"
           />
         </div>
 

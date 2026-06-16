@@ -17,14 +17,16 @@ import {
   Phone, 
   Mail, 
   ArrowRight,
-  TrendingUp
+  TrendingUp,
+  Home
 } from 'lucide-react';
 import styles from './page.module.css';
 
 const deptImages: Record<string, string> = {
   pediatrics: '/images/pediatric.jpg',
   ent: '/images/ent.jpg',
-  orthopedics: '/images/orthopedics image.jpg'
+  orthopedics: '/images/orthopedics image.jpg',
+  dermatology: '/images/dermatology.jpg'
 };
 
 export default async function HomePage() {
@@ -49,17 +51,17 @@ export default async function HomePage() {
                 <span>Accredited Healthcare Facility</span>
               </div>
               <h1 className={styles.heroTitle}>
-                Your Health, Our Commitment. Welcome to <span>VMC</span>.
+                Caring for your health 24x7, <span>VMC</span>
               </h1>
               <p className={styles.heroDesc}>
-                VMC Medical Center provides advanced clinical care, experienced doctors, and state-of-the-art diagnostic services. We focus on patient-centric treatments in Orthopedics, Pediatrics, and ENT.
+                VMC Medical Center provides advanced clinical care, experienced doctors, and state-of-the-art diagnostic services. We focus on patient-centric treatments in Orthopedics, Pediatrics, ENT, and Dermatology.
               </p>
               <div className={styles.heroBtns}>
                 <Link href="/book" className={styles.btnPrimary}>
-                  Book Appointment
+                  Book Consultation
                 </Link>
-                <Link href="/about" className={styles.btnSecondary}>
-                  Learn More About Us
+                <Link href="/book?type=service" className={styles.btnSecondary}>
+                  Book Service
                 </Link>
               </div>
             </div>
@@ -67,11 +69,11 @@ export default async function HomePage() {
             <div className={styles.heroVisual}>
               <div className={styles.medicalGraphic}>
                 <div className={styles.graphicHeader}>
-                  <div className={styles.graphicIcon}>
-                    <HeartHandshake size={24} />
+                  <div className={styles.graphicIcon} style={{ backgroundColor: 'transparent', padding: '2px' }}>
+                    <img src="/images/vmc logo.png" alt="VMC Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                   </div>
                   <div>
-                    <h3 className={styles.graphicTitle}>VMC Wellness Center</h3>
+                    <h3 className={styles.graphicTitle}>VMC Medical center</h3>
                     <p className={styles.graphicSub}>Weekly Patient Recovery Rate</p>
                   </div>
                 </div>
@@ -113,7 +115,52 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 2. Services Overview */}
+      {/* 2. Department Highlights */}
+      <section className="section">
+        <div className="container">
+          <div className={styles.secHeader}>
+            <span className={styles.badge} style={{ margin: '0 auto 1rem auto' }}>Medical Specialty Units</span>
+            <h2 className={styles.secTitle}>Our Core Departments</h2>
+            <p className={styles.secDesc}>Explore our main clinical practices, custom diagnostics, and expert physicians.</p>
+          </div>
+
+          <div className={styles.deptRow}>
+            {departments.map((dept) => (
+              <Link href={`/departments/${dept.slug}`} key={dept.id} className={styles.deptCard}>
+                <div 
+                  className={styles.deptVisual}
+                  style={deptImages[dept.slug] ? {
+                    backgroundImage: `linear-gradient(135deg, rgba(8, 113, 178, 0.7) 0%, rgba(149, 200, 62, 0.7) 100%), url('${deptImages[dept.slug]}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  } : undefined}
+                >
+                  <h3 style={{ textTransform: 'uppercase', fontSize: '1.5rem', letterSpacing: '1px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{dept.name}</h3>
+                </div>
+                <div className={styles.deptBody}>
+                  <h3 className={styles.deptName}>{dept.name}</h3>
+                  <p className={styles.deptDesc}>{dept.description}</p>
+                  
+                  <ul className={styles.deptFeatures}>
+                    {dept.services.slice(0, 3).map((service, index) => (
+                      <li key={index} className={styles.deptFeature}>
+                        <ArrowRight size={14} style={{ color: 'var(--accent)' }} />
+                        <span>{service}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className={styles.deptLink}>
+                    Explore Department & Doctors <ArrowRight size={16} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Services Overview */}
       <section className="section section-bg">
         <div className="container">
           <div className={styles.secHeader}>
@@ -154,57 +201,20 @@ export default async function HomePage() {
               <h3 className={styles.serviceTitle}>Rehabilitation</h3>
               <p className={styles.serviceDesc}>Personalized physical therapy and mobility treatment programs for bone and joint recovery.</p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* 3. Department Highlights */}
-      <section className="section">
-        <div className="container">
-          <div className={styles.secHeader}>
-            <span className={styles.badge} style={{ margin: '0 auto 1rem auto' }}>Medical Specialty Units</span>
-            <h2 className={styles.secTitle}>Our Core Departments</h2>
-            <p className={styles.secDesc}>Explore our main clinical practices, custom diagnostics, and expert physicians.</p>
-          </div>
-
-          <div className={styles.deptRow}>
-            {departments.map((dept) => (
-              <div key={dept.id} className={styles.deptCard}>
-                <div 
-                  className={styles.deptVisual}
-                  style={deptImages[dept.slug] ? {
-                    backgroundImage: `linear-gradient(135deg, rgba(8, 113, 178, 0.7) 0%, rgba(149, 200, 62, 0.7) 100%), url('${deptImages[dept.slug]}')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  } : undefined}
-                >
-                  <h3 style={{ textTransform: 'uppercase', fontSize: '1.5rem', letterSpacing: '1px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{dept.name}</h3>
-                </div>
-                <div className={styles.deptBody}>
-                  <h3 className={styles.deptName}>{dept.name}</h3>
-                  <p className={styles.deptDesc}>{dept.description}</p>
-                  
-                  <ul className={styles.deptFeatures}>
-                    {dept.services.slice(0, 3).map((service, index) => (
-                      <li key={index} className={styles.deptFeature}>
-                        <ArrowRight size={14} style={{ color: 'var(--accent)' }} />
-                        <span>{service}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link href={`/departments/${dept.slug}`} className={styles.deptLink}>
-                    Explore Department & Doctors <ArrowRight size={16} />
-                  </Link>
-                </div>
+            <div className={styles.serviceCard}>
+              <div className={styles.serviceIcon}>
+                <Home size={28} />
               </div>
-            ))}
+              <h3 className={styles.serviceTitle}>Home Visit</h3>
+              <p className={styles.serviceDesc}>Get professional medical consultations, primary health screenings, and nursing support in the comfort of your home.</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* 4. Doctor Highlights */}
-      <section className="section section-bg" style={{ overflow: 'hidden' }}>
+      <section className="section" style={{ overflow: 'hidden' }}>
         <div className="container">
           <div className={styles.secHeader}>
             <span className={styles.badge} style={{ margin: '0 auto 1rem auto' }}>Medical Consultants</span>
@@ -228,15 +238,15 @@ export default async function HomePage() {
 
         <div className="container">
           <div className="text-center" style={{ marginTop: '3rem' }}>
-            <Link href="/departments" className={styles.btnSecondary} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-              View All Doctors By Department <ArrowRight size={18} />
+            <Link href="/doctors" className={styles.btnSecondary} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              View All Doctors <ArrowRight size={18} />
             </Link>
           </div>
         </div>
       </section>
 
       {/* 5. Contact Section */}
-      <section className="section" id="contact-info">
+      <section className="section section-bg" id="contact-info">
         <div className="container">
           <div className={styles.secHeader}>
             <span className={styles.badge} style={{ margin: '0 auto 1rem auto' }}>Reach Out</span>
@@ -255,7 +265,7 @@ export default async function HomePage() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h4>Location</h4>
-                    <p>120 Healthcare Parkway, Medical Plaza Suite 400, NY 10001</p>
+                    <p>Karumalloor, Paravur, Aluva</p>
                   </div>
                 </div>
 
@@ -265,7 +275,7 @@ export default async function HomePage() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h4>Phone Number</h4>
-                    <p>+1 (555) 019-VMC1 (8621)</p>
+                    <p><a href="tel:9947653954" style={{ color: 'inherit', textDecoration: 'underline' }}>9947653954</a></p>
                   </div>
                 </div>
 
@@ -275,7 +285,7 @@ export default async function HomePage() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h4>Email Address</h4>
-                    <p>info@vmcmedicalcenter.com</p>
+                    <p><a href="mailto:vmcclinic@gmail.com" style={{ color: 'inherit', textDecoration: 'underline' }}>vmcclinic@gmail.com</a></p>
                   </div>
                 </div>
 

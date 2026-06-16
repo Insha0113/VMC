@@ -4,14 +4,17 @@ import { notFound } from 'next/navigation';
 import { getDepartments, getDoctors } from '@/lib/db';
 import DoctorCard from '@/components/DoctorCard';
 import ECGLoader from '@/components/ECGLoader';
-import { CheckSquare, ArrowLeft, Calendar } from 'lucide-react';
+import { CheckSquare, Calendar } from 'lucide-react';
 import styles from '../departments.module.css';
+import BackButton from '@/components/BackButton';
 
 const deptImages: Record<string, string> = {
   pediatrics: '/images/pediatric.jpg',
   ent: '/images/ent.jpg',
-  orthopedics: '/images/orthopedics image.jpg'
+  orthopedics: '/images/orthopedics image.jpg',
+  dermatology: '/images/dermatology.jpg'
 };
+
 
 export const unstable_instant = {
   prefetch: 'static',
@@ -84,17 +87,18 @@ async function DepartmentDetailContent({ slug }: { slug: string }) {
       <section 
         className={styles.header}
         style={{
-          minHeight: 'calc(100vh - 80px)',
+          minHeight: 'var(--header-min-height, 75vh)',
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
           background: 'none',
-          padding: 0,
+          padding: '2.5rem 0',
           backgroundColor: '#043f65'
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
@@ -102,8 +106,6 @@ async function DepartmentDetailContent({ slug }: { slug: string }) {
             right: 0,
             bottom: 0,
             backgroundImage: `url('${deptImages[slug.toLowerCase()] || '/images/doctor interaction.jpg'}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             opacity: 0.75,
             zIndex: 1
           }}
@@ -115,18 +117,24 @@ async function DepartmentDetailContent({ slug }: { slug: string }) {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 100%)',
+            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 60%, rgba(149, 200, 62, 0.25) 100%)',
             zIndex: 2
           }}
         />
-        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4rem 0' }}>
-          <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
-            <Link href="/departments" className={styles.btnBook} style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <ArrowLeft size={16} /> Back to Departments
-              </span>
-            </Link>
-          </div>
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '120px',
+            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(149, 200, 62, 0.08) 35%, rgba(149, 200, 62, 0.2) 70%, var(--background) 100%)',
+            pointerEvents: 'none',
+            zIndex: 3
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 4, padding: '2rem 0' }}>
+          <BackButton />
           <h1 className={styles.title}>{department.name} Department</h1>
           <p className={styles.subtitle}>
             State-of-the-art diagnostic facilities, advanced therapies, and dedicated clinical consultants.
@@ -138,8 +146,16 @@ async function DepartmentDetailContent({ slug }: { slug: string }) {
       <section className={styles.section}>
         <div className="container">
           <div className={styles.detailGrid}>
-            {/* Doctor Listings (Left Side) */}
-            <div>
+            {/* 1. Department Overview Block */}
+            <div className={styles.overviewBlock}>
+              <div className={styles.overviewSidebar} style={{ position: 'static' }}>
+                <h3 className={styles.sidebarSectionTitle}>Department Overview</h3>
+                <p className={styles.overviewText} style={{ marginBottom: 0 }}>{department.description}</p>
+              </div>
+            </div>
+
+            {/* 2. Doctor Listings Block */}
+            <div className={styles.doctorsBlock}>
               <h2 className={styles.overviewTitle}>Our Specialists</h2>
               {departmentDoctors.length === 0 ? (
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>No doctors listed currently in this department.</p>
@@ -152,13 +168,10 @@ async function DepartmentDetailContent({ slug }: { slug: string }) {
               )}
             </div>
 
-            {/* Overview and Services (Right Side Sidebar) */}
-            <div>
-              <div className={styles.overviewSidebar}>
-                <h3 className={styles.sidebarSectionTitle}>Department Overview</h3>
-                <p className={styles.overviewText}>{department.description}</p>
-
-                <h3 className={styles.sidebarSectionTitle} style={{ marginTop: '2rem' }}>Available Services</h3>
+            {/* 3. Available Services Block */}
+            <div className={styles.servicesBlock}>
+              <div className={styles.overviewSidebar} style={{ position: 'static' }}>
+                <h3 className={styles.sidebarSectionTitle}>Available Services</h3>
                 <div className={styles.serviceCardList}>
                   {department.services.map((service, index) => (
                     <div key={index} className={styles.serviceCardItem}>

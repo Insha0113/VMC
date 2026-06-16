@@ -162,6 +162,24 @@
   gap: 4rem;
 }
 
+.doctorsBlock {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: start;
+}
+
+.overviewBlock {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+}
+
+.servicesBlock {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+}
+
 .overviewTitle {
   font-size: 1.75rem;
   font-weight: 800;
@@ -261,6 +279,18 @@
   .overviewSidebar {
     padding: 1.5rem;
     position: static;
+  }
+  .overviewBlock {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .doctorsBlock {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .servicesBlock {
+    grid-column: 1;
+    grid-row: 3;
   }
 }
 

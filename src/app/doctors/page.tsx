@@ -1,14 +1,17 @@
-import React, { Suspense } from 'react';
-import ECGLoader from '@/components/ECGLoader';
-import BookingForm from './BookingForm';
-import styles from './page.module.css';
+import React from 'react';
+import { getDoctors } from '@/lib/db';
+import DoctorCard from '@/components/DoctorCard';
 import BackButton from '@/components/BackButton';
+import styles from './page.module.css';
 
 export const unstable_instant = { prefetch: 'static' };
 
-export default function BookingPage() {
+export default async function DoctorsPage() {
+  const doctors = await getDoctors();
+
   return (
     <div>
+      {/* Page Header */}
       <section 
         className={styles.header}
         style={{
@@ -23,15 +26,14 @@ export default function BookingPage() {
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: "url('/images/doctor interaction2.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundImage: "url('/images/ourdoctors.jpg')",
             opacity: 0.75,
             zIndex: 1
           }}
@@ -61,22 +63,21 @@ export default function BookingPage() {
         />
         <div className="container" style={{ position: 'relative', zIndex: 4 }}>
           <BackButton />
-          <h1 className={styles.title}>Online Booking System</h1>
+          <h1 className={styles.title}>Our Specialists</h1>
           <p className={styles.subtitle}>
-            Book a clinical slot in seconds. Select a specialty, specialist, date, and confirm.
+            Meet our team of board-certified clinical experts, consultants, and surgical specialists dedicated to your family's health and wellness.
           </p>
         </div>
       </section>
 
+      {/* Doctors Grid Section */}
       <section className={styles.section}>
         <div className="container">
-          <Suspense fallback={
-            <div className="container section text-center">
-              <ECGLoader message="Loading appointment calendar dependencies..." />
-            </div>
-          }>
-            <BookingForm />
-          </Suspense>
+          <div className={styles.doctorsGrid}>
+            {doctors.map((doc) => (
+              <DoctorCard key={doc.id} doctor={doc} />
+            ))}
+          </div>
         </div>
       </section>
     </div>

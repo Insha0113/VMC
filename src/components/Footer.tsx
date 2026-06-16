@@ -78,6 +78,7 @@ export default function Footer() {
             <ul className={styles.links}>
               <li><Link href="/" className={styles.link}>Home</Link></li>
               <li><Link href="/about" className={styles.link}>About Us</Link></li>
+              <li><Link href="/services" className={styles.link}>Our Services</Link></li>
               <li><Link href="/departments" className={styles.link}>Our Departments</Link></li>
               <li><Link href="/contact" className={styles.link}>Contact Us</Link></li>
               {isAdmin && <li><Link href="/admin" className={styles.link}>Admin Panel</Link></li>}
@@ -91,6 +92,7 @@ export default function Footer() {
               <li><Link href="/departments/orthopedics" className={styles.link}>Orthopedics</Link></li>
               <li><Link href="/departments/pediatrics" className={styles.link}>Pediatrics</Link></li>
               <li><Link href="/departments/ent" className={styles.link}>ENT (Otolaryngology)</Link></li>
+              <li><Link href="/departments/dermatology" className={styles.link}>Dermatology</Link></li>
             </ul>
           </div>
 
@@ -100,15 +102,15 @@ export default function Footer() {
             <div className={styles.links}>
               <div className={styles.contactItem}>
                 <MapPin size={18} className={styles.contactIcon} />
-                <span>120 Healthcare Parkway, Medical Plaza Suite 400, NY 10001</span>
+                <span>Karumalloor, Paravoor, Aluva</span>
               </div>
               <div className={styles.contactItem}>
                 <Phone size={18} className={styles.contactIcon} />
-                <span>+1 (555) 019-VMC1 (8621)</span>
+                <span><a href="tel:9947653954" style={{ color: 'inherit', textDecoration: 'none' }}>9947653954</a></span>
               </div>
               <div className={styles.contactItem}>
                 <Mail size={18} className={styles.contactIcon} />
-                <span>info@vmcmedicalcenter.com</span>
+                <span><a href="mailto:vmcclinic@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>vmcclinic@gmail.com</a></span>
               </div>
               <div className={styles.contactItem}>
                 <Clock size={18} className={styles.contactIcon} />
@@ -122,8 +124,8 @@ export default function Footer() {
         <div className={styles.bottom}>
           <p>&copy; {currentYear} VMC Medical Center. All rights reserved.</p>
           <div className={styles.bottomLinks}>
-            <Link href="/" className={styles.bottomLink}>Privacy Policy</Link>
-            <Link href="/" className={styles.bottomLink}>Terms of Service</Link>
+            <Link href="/privacy" className={styles.bottomLink}>Privacy Policy</Link>
+            <Link href="/terms" className={styles.bottomLink}>Terms of Service</Link>
           </div>
         </div>
       </div>

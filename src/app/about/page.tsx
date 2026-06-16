@@ -2,6 +2,7 @@ import React from 'react';
 export const unstable_instant = { prefetch: 'static' };
 import { Target, Eye, Sparkles, User, Briefcase, Award } from 'lucide-react';
 import styles from './page.module.css';
+import BackButton from '@/components/BackButton';
 
 // Reusable SVG for leadership profiles to ensure high resolution graphics
 const LeadershipAvatar = ({ role }: { role: string }) => {
@@ -70,13 +71,13 @@ export default function AboutPage() {
       <section 
         className={styles.aboutHeader}
         style={{
-          minHeight: 'calc(100vh - 80px)',
+          minHeight: 'var(--header-min-height, 75vh)',
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
           background: 'none',
-          padding: 0,
+          padding: '2.5rem 0',
           backgroundColor: '#043f65'
         }}
       >
@@ -101,11 +102,24 @@ export default function AboutPage() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 100%)',
+            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.85) 0%, rgba(8, 113, 178, 0.6) 60%, rgba(149, 200, 62, 0.25) 100%)',
             zIndex: 2
           }}
         />
-        <div className="container" style={{ position: 'relative', zIndex: 3 }}>
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '120px',
+            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(149, 200, 62, 0.08) 35%, rgba(149, 200, 62, 0.2) 70%, var(--background) 100%)',
+            pointerEvents: 'none',
+            zIndex: 3
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 4 }}>
+          <BackButton />
           <h1 className={styles.title}>About VMC Medical Center</h1>
           <p className={styles.subtitle}>
             A decade of providing world-class medical services, clinical integrity, and personalized care.

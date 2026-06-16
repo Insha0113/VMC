@@ -20,6 +20,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputVal, setInputVal] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
   
   const bodyRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -30,17 +31,22 @@ export default function Chatbot() {
       {
         id: 'welcome',
         sender: 'bot',
-        text: 'Hello! I am VMC Virtual Assistant, available 24/7. I can guide you through our services, doctor listings, or help you book an appointment. How can I help you today?',
+        text: "Hi , I'm Arjun, VMC Assistant. You can ask me anything related to VMC!",
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }
     ]);
 
-    // Auto open chatbot on page open (0.5 seconds delay for a smooth introduction)
+    // Show speech bubble after 10 seconds (10000ms)
     const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 500);
+      setShowBubble(true);
+    }, 10000);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleOpenChat = () => {
+    setIsOpen(true);
+    setShowBubble(false);
+  };
 
   // Close chatbot when clicking outside
   useEffect(() => {
@@ -118,7 +124,7 @@ export default function Chatbot() {
 
     if (text.includes('contact') || text.includes('phone') || text.includes('email') || text.includes('address') || text.includes('location') || text.includes('map')) {
       return {
-        text: 'VMC Medical Center is located at 120 Healthcare Parkway. Phone: +1 (555) 019-8621, Email: info@vmcmedicalcenter.com. Open 24/7 for emergency care.',
+        text: 'VMC Clinic is located at Karumalloor, Paravoor, Aluva. Phone: 9947653954, Email: vmcclinic@gmail.com. Open 24/7 for emergency care.',
         link: { label: 'Contact Us Page', href: '/contact' }
       };
     }
@@ -143,7 +149,7 @@ export default function Chatbot() {
     }
 
     return {
-      text: "I'm here to guide you with basic clinic information. For clinical enquiries, please call us directly at +1 (555) 019-8621. Use the buttons below or ask about booking, doctors, or departments!"
+      text: "I'm here to guide you with basic clinic information. For clinical enquiries, please call us directly at 9947653954. Use the buttons below or ask about booking, doctors, or departments!"
     };
   };
 
@@ -169,11 +175,32 @@ export default function Chatbot() {
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
+      {/* Speech Bubble */}
+      {!isOpen && showBubble && (
+        <div className={styles.speechBubble} onClick={handleOpenChat}>
+          <button 
+            type="button" 
+            className={styles.closeBubbleBtn} 
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              setShowBubble(false); 
+            }} 
+            aria-label="Close message"
+          >
+            <X size={14} />
+          </button>
+          <div className={styles.speechContent}>
+            <span className={styles.speechAvatar}>🙋</span>
+            <p className={styles.speechText}>Hi , I'm Arjun, VMC Assistant. You can ask me anything related to VMC!</p>
+          </div>
+        </div>
+      )}
+
       {/* Floating Chat Bubble */}
       {!isOpen && (
         <button 
           className={styles.bubble} 
-          onClick={() => setIsOpen(true)}
+          onClick={handleOpenChat}
           aria-label="Open Chatbot"
         >
           <div className={styles.pulse}></div>
@@ -191,7 +218,7 @@ export default function Chatbot() {
                 <Bot size={20} color="white" />
               </div>
               <div>
-                <h4 className={styles.title}>VMC Support</h4>
+                <h4 className={styles.title}>Arjun - Medical Assistant</h4>
                 <div className={styles.status}>
                   <span className={styles.statusDot}></span>
                   Online - 24/7 Guidance
@@ -208,23 +235,39 @@ export default function Chatbot() {
             {messages.map((m) => (
               <div
                 key={m.id}
-                className={`${styles.msg} ${
-                  m.sender === 'bot' ? styles.msgBot : styles.msgUser
+                className={`${styles.msgWrapper} ${
+                  m.sender === 'bot' ? styles.msgWrapperBot : styles.msgWrapperUser
                 }`}
               >
-                <div>{m.text}</div>
-                {m.link && (
-                  <Link href={m.link.href} className={styles.linkButton} onClick={() => setIsOpen(false)}>
-                    {m.link.label}
-                  </Link>
+                {m.sender === 'bot' && (
+                  <div className={styles.msgAvatar} aria-label="Arjun Avatar">
+                    🙋
+                  </div>
                 )}
-                <div className={styles.time}>{m.time}</div>
+                <div
+                  className={`${styles.msg} ${
+                    m.sender === 'bot' ? styles.msgBot : styles.msgUser
+                  }`}
+                >
+                  <div>{m.text}</div>
+                  {m.link && (
+                    <Link href={m.link.href} className={styles.linkButton} onClick={() => setIsOpen(false)}>
+                      {m.link.label}
+                    </Link>
+                  )}
+                  <div className={styles.time}>{m.time}</div>
+                </div>
               </div>
             ))}
 
             {isTyping && (
-              <div className={`${styles.msg} ${styles.msgBot}`} style={{ padding: '0.5rem 1rem' }}>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>VMC is typing...</span>
+              <div className={`${styles.msgWrapper} ${styles.msgWrapperBot}`}>
+                <div className={styles.msgAvatar} aria-label="Arjun Avatar">
+                  🙋
+                </div>
+                <div className={`${styles.msg} ${styles.msgBot}`} style={{ padding: '0.5rem 1rem' }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>VMC is typing...</span>
+                </div>
               </div>
             )}
           </div>

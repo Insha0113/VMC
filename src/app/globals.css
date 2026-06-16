@@ -39,6 +39,15 @@
   --border-radius: 12px;
   --border-radius-lg: 20px;
   --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Subpage Header Heights */
+  --header-min-height: 75vh;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-min-height: 50vh;
+  }
 }
 
 
@@ -46,6 +55,10 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -127,4 +140,35 @@ button, input, select, textarea {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Responsive banner background utility to cover completely in all viewports */
+.responsive-banner-bg {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Helper class for responsive BackButton styling */
+.back-button-responsive {
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  .back-button-responsive {
+    display: none !important;
+  }
+}
+
+/* Responsive hero video class */
+.hero-video-el {
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .hero-video-el {
+    object-fit: contain !important;
+  }
+}
+
+
 

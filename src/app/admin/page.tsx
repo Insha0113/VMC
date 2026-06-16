@@ -399,7 +399,7 @@ export default function AdminDashboardPage() {
                         <th className={styles.th}>ID</th>
                         <th className={styles.th}>Patient</th>
                         <th className={styles.th}>Phone</th>
-                        <th className={styles.th}>Doctor</th>
+                        <th className={styles.th}>Doctor / Service</th>
                         <th className={styles.th}>Date & Time</th>
                         <th className={styles.th}>Status</th>
                         <th className={styles.th} style={{ textAlign: 'center' }}>Actions</th>
@@ -418,12 +418,30 @@ export default function AdminDashboardPage() {
                             <td className={styles.td} style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{booking.id}</td>
                             <td className={styles.td}>
                               <div style={{ fontWeight: 'bold' }}>{booking.patientName}</div>
-                              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{booking.patientEmail}</div>
+                              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                                <a href={`mailto:${booking.patientEmail}`} style={{ color: 'inherit', textDecoration: 'underline' }}>{booking.patientEmail}</a>
+                              </div>
+                              {booking.symptoms && (
+                                <div style={{ fontSize: '0.75rem', marginTop: '4px', color: 'var(--text-secondary)', fontStyle: 'italic', maxWidth: '220px', whiteSpace: 'normal', wordBreak: 'break-word' }}>
+                                  <strong>Notes:</strong> {booking.symptoms}
+                                </div>
+                              )}
                             </td>
-                            <td className={styles.td} style={{ whiteSpace: 'nowrap' }}>{booking.patientPhone}</td>
+                            <td className={styles.td} style={{ whiteSpace: 'nowrap' }}>
+                              <a href={`tel:${booking.patientPhone}`} style={{ color: 'inherit', textDecoration: 'underline' }}>{booking.patientPhone}</a>
+                            </td>
                             <td className={styles.td}>
-                              <div>{booking.doctorName}</div>
-                              <span style={{ fontSize: '0.75rem', backgroundColor: 'var(--primary-light)', color: 'var(--primary)', padding: '2px 6px', borderRadius: '4px' }}>
+                              <div style={booking.department.toLowerCase() === 'clinical services' ? { fontWeight: 'bold' } : undefined}>
+                                {booking.doctorName}
+                              </div>
+                              <span style={{ 
+                                fontSize: '0.75rem', 
+                                backgroundColor: booking.department.toLowerCase() === 'clinical services' ? 'var(--accent-light)' : 'var(--primary-light)', 
+                                color: booking.department.toLowerCase() === 'clinical services' ? 'var(--accent-dark)' : 'var(--primary)', 
+                                padding: '2px 6px', 
+                                borderRadius: '4px',
+                                fontWeight: booking.department.toLowerCase() === 'clinical services' ? 'bold' : 'normal'
+                              }}>
                                 {booking.department.toUpperCase()}
                               </span>
                             </td>
@@ -522,8 +540,8 @@ export default function AdminDashboardPage() {
                           </td>
                           <td className={styles.td}>{doc.specialty}</td>
                           <td className={styles.td} style={{ fontSize: '0.8rem' }}>
-                            <div>Email: {doc.email}</div>
-                            <div>Phone: {doc.phone}</div>
+                            <div>Email: <a href={`mailto:${doc.email}`} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>{doc.email}</a></div>
+                            <div>Phone: <a href={`tel:${doc.phone}`} style={{ color: 'var(--primary)', textDecoration: 'underline' }}>{doc.phone}</a></div>
                           </td>
                           <td className={styles.td} style={{ fontSize: '0.8rem' }}>{doc.availability.join(', ')}</td>
                           <td className={styles.td}>
@@ -634,8 +652,14 @@ export default function AdminDashboardPage() {
                             </td>
                             <td className={styles.td}>
                               <div style={{ fontWeight: 'bold' }}>{enq.name}</div>
-                              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{enq.email}</div>
-                              {enq.phone && <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Tel: {enq.phone}</div>}
+                              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                                <a href={`mailto:${enq.email}`} style={{ color: 'inherit', textDecoration: 'underline' }}>{enq.email}</a>
+                              </div>
+                              {enq.phone && (
+                                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                                  Tel: <a href={`tel:${enq.phone}`} style={{ color: 'inherit', textDecoration: 'underline' }}>{enq.phone}</a>
+                                </div>
+                              )}
                             </td>
                             <td className={styles.td} style={{ fontWeight: '700' }}>{enq.subject}</td>
                             <td className={styles.td} style={{ fontSize: '0.85rem', lineBreak: 'anywhere', maxWidth: '400px' }}>
@@ -733,7 +757,7 @@ export default function AdminDashboardPage() {
                     className={styles.input}
                     value={docFormData.phone}
                     onChange={e => setDocFormData({ ...docFormData, phone: e.target.value })}
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+91 99999 99999"
                   />
                 </div>
               </div>

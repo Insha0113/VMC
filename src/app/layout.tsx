@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SubmitReview from "@/components/SubmitReview";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -41,6 +42,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable}`} style={{ scrollBehavior: 'smooth' }}>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontFamily: 'var(--font-inter)' }}>
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
         <Suspense fallback={null}>
           <Header />
         </Suspense>

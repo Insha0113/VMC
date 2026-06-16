@@ -54,6 +54,30 @@
   border-radius: 2px;
 }
 
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.searchBtn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.searchBtn:hover {
+  background-color: var(--background);
+  color: var(--primary);
+}
+
 .actions {
   display: flex;
   align-items: center;
@@ -86,6 +110,7 @@
   cursor: pointer;
   padding: 0.5rem;
 }
+
 
 /* Mobile responsive drawer */
 .drawer {
@@ -144,3 +169,185 @@
     display: block;
   }
 }
+
+.searchOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10vh;
+}
+
+.searchOverlayContainer {
+  background: var(--card-bg);
+  width: 90%;
+  max-width: 600px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.searchBarRow {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: transparent;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.searchCloseBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.searchCloseBtn:hover {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+.searchResultsContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.popularSearches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.searchSectionTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.popularTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.popularTag {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.popularTag:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  background-color: transparent;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.resultItem:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-light);
+}
+
+.resultItem:hover .resultArrow {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+.resultDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.resultTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.resultCategory {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resultArrow {
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.noResults {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  padding: 1.5rem 0;
+}
+

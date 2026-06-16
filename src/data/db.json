@@ -179,6 +179,55 @@
         "Friday"
       ],
       "bio": "Dr. Patel helps kids manage eczema, food allergies, environmental allergies, and immune disorders. She is dedicated to improving quality of life for families."
+    },
+    {
+      "id": "doc-12",
+      "name": "Dr. Arjun Nair",
+      "specialty": "Consultant Dermatologist",
+      "department": "dermatology",
+      "email": "arjun.nair@vmc.com",
+      "phone": "9947653954",
+      "image": "/images/doc7.jpg",
+      "experience": "12+ Years",
+      "education": "MD, DNB - Dermatology, Venereology & Leprosy",
+      "availability": [
+        "Monday",
+        "Wednesday",
+        "Thursday"
+      ],
+      "bio": "Dr. Arjun Nair specializes in clinical dermatology, skin cancer screenings, and advanced laser treatments, with a focus on evidence-based skin wellness."
+    },
+    {
+      "id": "doc-13",
+      "name": "Dr. Priya Balan",
+      "specialty": "Cosmetic Dermatologist",
+      "department": "dermatology",
+      "email": "priya.balan@vmc.com",
+      "phone": "9947653954",
+      "image": "/images/doc8.jpg",
+      "experience": "8+ Years",
+      "education": "MD - Dermatology, Fellowship in Aesthetic Medicine",
+      "availability": [
+        "Tuesday",
+        "Friday"
+      ],
+      "bio": "Dr. Priya Balan is an expert in cosmetic dermatology, scar therapies, chemical peels, and anti-aging skin rejuvenation treatments."
+    },
+    {
+      "id": "doc-14",
+      "name": "Dr. Marcus Vance",
+      "specialty": "Pediatric Dermatologist",
+      "department": "dermatology",
+      "email": "marcus.vance@vmc.com",
+      "phone": "9947653954",
+      "image": "/images/doc9.jpg",
+      "experience": "10+ Years",
+      "education": "MD - Pediatrics & Dermatology",
+      "availability": [
+        "Wednesday",
+        "Friday"
+      ],
+      "bio": "Dr. Marcus Vance focuses on pediatric skin conditions, treating eczema, birthmarks, and pediatric allergies with a gentle, child-focused approach."
     }
   ],
   "departments": [
@@ -223,6 +272,20 @@
         "Sleep Apnea & Snoring Treatment"
       ],
       "icon": "Activity"
+    },
+    {
+      "id": "dept-4",
+      "slug": "dermatology",
+      "name": "Dermatology",
+      "description": "Advanced skin care diagnostics, laser therapies, acne care, and cosmetic treatments. Our board-certified dermatologists help you achieve healthy skin.",
+      "services": [
+        "Acne & Scar Treatment",
+        "Skin Cancer Screening",
+        "Laser Skin Resurfacing",
+        "Eczema & Psoriasis Care",
+        "Cosmetic Dermatology"
+      ],
+      "icon": "Sparkles"
     }
   ],
   "bookings": [

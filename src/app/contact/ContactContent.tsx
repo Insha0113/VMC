@@ -7,22 +7,12 @@ import {
   Phone, 
   Mail, 
   Clock,
-  Navigation,
-  Plus,
-  Minus
+  Navigation
 } from 'lucide-react';
 import styles from './page.module.css';
+import BackButton from '@/components/BackButton';
 
 export default function ContactContent() {
-  const [zoomLevel, setZoomLevel] = useState(15);
-
-  const handleZoomIn = () => {
-    if (zoomLevel < 18) setZoomLevel(zoomLevel + 1);
-  };
-
-  const handleZoomOut = () => {
-    if (zoomLevel > 12) setZoomLevel(zoomLevel - 1);
-  };
 
   return (
     <div>
@@ -30,13 +20,13 @@ export default function ContactContent() {
       <section 
         className={styles.header}
         style={{
-          minHeight: 'calc(100vh - 80px)',
+          minHeight: 'var(--header-min-height, 75vh)',
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
           background: 'none',
-          padding: 0,
+          padding: '2.5rem 0',
           backgroundColor: '#043f65'
         }}
       >
@@ -61,11 +51,24 @@ export default function ContactContent() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 100%)',
+            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 60%, rgba(149, 200, 62, 0.25) 100%)',
             zIndex: 2
           }}
         />
-        <div className="container" style={{ position: 'relative', zIndex: 3 }}>
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '120px',
+            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(149, 200, 62, 0.08) 35%, rgba(149, 200, 62, 0.2) 70%, var(--background) 100%)',
+            pointerEvents: 'none',
+            zIndex: 3
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 4 }}>
+          <BackButton />
           <h1 className={styles.title}>Contact Us</h1>
           <p className={styles.subtitle}>
             Have a question or need emergency support? Reach out to our team at any time.
@@ -88,7 +91,7 @@ export default function ContactContent() {
                     </div>
                     <div className={styles.details}>
                       <h4>Our Address</h4>
-                      <p>120 Healthcare Parkway, Medical Plaza Suite 400, NY 10001</p>
+                      <p>Karumalloor, Paravoor, Aluva</p>
                     </div>
                   </div>
 
@@ -98,8 +101,8 @@ export default function ContactContent() {
                     </div>
                     <div className={styles.details}>
                       <h4>Phone Number</h4>
-                      <p>General Enquiry: +1 (555) 019-VMC1 (8621)</p>
-                      <p>Emergency: +1 (555) 019-9111 (24/7 Hotline)</p>
+                      <p>General Enquiry: <a href="tel:9947653954" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>9947653954</a></p>
+                      <p>Emergency Hotline: <a href="tel:9947653954" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>9947653954</a> (24/7)</p>
                     </div>
                   </div>
 
@@ -109,8 +112,7 @@ export default function ContactContent() {
                     </div>
                     <div className={styles.details}>
                       <h4>Email Support</h4>
-                      <p>info@vmcmedicalcenter.com</p>
-                      <p>appointments@vmcmedicalcenter.com</p>
+                      <p><a href="mailto:vmcclinic@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>vmcclinic@gmail.com</a></p>
                     </div>
                   </div>
 
@@ -161,85 +163,34 @@ export default function ContactContent() {
             <QuickContactForm />
           </div>
 
-          {/* Google Maps Mock Integration */}
+          {/* Google Maps Integration */}
           <div>
             <div style={{ marginBottom: '2rem' }}>
               <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem' }}>Hospital Map Location</h2>
-              <p style={{ color: 'var(--text-secondary)' }}>Find us easily in the center of the Healthcare Parkway square.</p>
+              <p style={{ color: 'var(--text-secondary)' }}>Find us easily in Karumalloor, Paravur, Aluva.</p>
             </div>
             
             <div className={styles.mapWrapper}>
-              {/* Custom SVG city map canvas */}
               <div className={styles.mapCanvas}>
-                <svg width="100%" height="100%" viewBox="0 0 800 450" preserveAspectRatio="none" style={{ display: 'block' }}>
-                  {/* Background Land */}
-                  <rect width="800" height="450" fill="#f4f3f0" />
-                  
-                  {/* Green Parks */}
-                  <rect x="50" y="50" width="180" height="120" fill="#d1e7dd" rx="8" />
-                  <rect x="520" y="240" width="220" height="150" fill="#d1e7dd" rx="8" />
-                  
-                  {/* River */}
-                  <path d="M-50 400 C 200 380, 350 250, 500 220 C 650 190, 750 80, 850 50" stroke="#a5c9eb" strokeWidth="48" fill="none" opacity="0.8" />
-                  
-                  {/* City Grids - Secondary Roads */}
-                  <path d="M 0 100 H 800 M 0 250 H 800 M 0 350 H 800" stroke="#ffffff" strokeWidth="8" />
-                  <path d="M 150 0 V 450 M 350 0 V 450 M 600 0 V 450" stroke="#ffffff" strokeWidth="8" />
-
-                  {/* Primary Road: Healthcare Parkway */}
-                  <path d="M 0 180 H 800" stroke="#ffebc2" strokeWidth="18" />
-                  <path d="M 450 0 V 450" stroke="#ffebc2" strokeWidth="18" />
-                  
-                  {/* Healthcare Parkway Labels */}
-                  <text x="80" y="185" fill="#7f6336" fontSize="10" fontWeight="bold">HEALTHCARE PARKWAY</text>
-                  <text x="460" y="80" fill="#7f6336" fontSize="10" fontWeight="bold" transform="rotate(90 460 80)">MEDICAL BOULEVARD</text>
-                  
-                  {/* Nearby Landmarks */}
-                  <rect x="180" y="200" width="100" height="40" fill="#cbd5e1" rx="4" />
-                  <text x="195" y="224" fill="#475569" fontSize="9" fontWeight="600">Central Metro</text>
-
-                  <rect x="490" y="80" width="90" height="40" fill="#cbd5e1" rx="4" />
-                  <text x="502" y="104" fill="#475569" fontSize="9" fontWeight="600">Pharmacy Hub</text>
-                </svg>
-
-                {/* Map Pin over the VMC Center */}
-                <div 
-                  className={styles.mapPin}
-                  style={{ 
-                    top: '40%', 
-                    left: '56.25%', // matches x=450 (which is 56.25% of 800)
-                    transform: `translate(-50%, -50%) scale(${1 + (zoomLevel - 15) * 0.1})` 
-                  }}
+                <iframe 
+                  src="https://maps.google.com/maps?q=Karumalloor,+Paravur,+Aluva&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen={true} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                
+                {/* Google Maps External Overlay Button */}
+                <a 
+                  href="https://www.google.com/maps?q=Karumalloor,+Paravur,+Aluva" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.mapOverlayBtn}
                 >
-                  <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                  </svg>
-                </div>
-
-                {/* Map Location Details Popup */}
-                <div 
-                  className={styles.mapPopup}
-                  style={{ 
-                    top: '38%', 
-                    left: '56.25%',
-                  }}
-                >
-                  <h4 className={styles.mapPopupTitle}>VMC Medical Center</h4>
-                  <p className={styles.mapPopupText}>Suite 400, Medical Plaza (Level 4)</p>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--accent-dark)', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px', marginTop: '4px' }}>
-                    <Navigation size={10} /> Zoom Level: {zoomLevel}x
-                  </span>
-                </div>
-
-                {/* Map Control Buttons */}
-                <div className={styles.mapControls}>
-                  <button className={styles.mapBtn} onClick={handleZoomIn} aria-label="Zoom In">
-                    <Plus size={18} />
-                  </button>
-                  <button className={styles.mapBtn} onClick={handleZoomOut} aria-label="Zoom Out">
-                    <Minus size={18} />
-                  </button>
-                </div>
+                  <Navigation size={16} /> Open in Google Maps
+                </a>
               </div>
             </div>
           </div>

@@ -156,10 +156,41 @@
   background-color: var(--background);
 }
 
+.msgWrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+  max-width: 85%;
+}
+
+.msgWrapperBot {
+  align-self: flex-start;
+}
+
+.msgWrapperUser {
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.msgAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--primary);
+  margin-bottom: 2px;
+  user-select: none;
+}
+
 .msg {
   display: flex;
   flex-direction: column;
-  max-width: 80%;
+  width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 14px;
   font-size: 0.9rem;
@@ -169,7 +200,6 @@
 .msgBot {
   background-color: var(--card-bg);
   color: var(--foreground);
-  align-self: flex-start;
   border-bottom-left-radius: 2px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
@@ -178,7 +208,6 @@
 .msgUser {
   background-color: var(--primary);
   color: white;
-  align-self: flex-end;
   border-bottom-right-radius: 2px;
   box-shadow: var(--shadow-sm);
 }
@@ -287,5 +316,98 @@
   .wrapper {
     bottom: 1rem;
     right: 1rem;
+  }
+}
+
+.speechBubble {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 280px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  animation: slide-up 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.speechBubble:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.speechBubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 24px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+
+.closeBubbleBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.closeBubbleBtn:hover {
+  color: var(--text-primary);
+}
+
+.speechContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-right: 12px;
+}
+
+.speechAvatar {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-top: 1px;
+  user-select: none;
+}
+
+.speechText {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .speechBubble {
+    width: calc(100vw - 2rem);
+    right: 0;
   }
 }

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getDoctors, getDepartments } from '@/lib/db';
 import FallbackImage from '@/components/FallbackImage';
 import ECGLoader from '@/components/ECGLoader';
+import BackButton from '@/components/BackButton';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -15,6 +16,7 @@ import {
   Briefcase
 } from 'lucide-react';
 import styles from './page.module.css';
+
 
 export const unstable_instant = {
   prefetch: 'static',
@@ -65,17 +67,18 @@ async function DoctorDetailContent({ id }: { id: string }) {
       <section 
         className={styles.header}
         style={{
-          minHeight: 'calc(100vh - 80px)',
+          minHeight: 'var(--header-min-height, 75vh)',
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
           background: 'none',
-          padding: 0,
+          padding: '2.5rem 0',
           backgroundColor: '#043f65'
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
@@ -83,8 +86,6 @@ async function DoctorDetailContent({ id }: { id: string }) {
             right: 0,
             bottom: 0,
             backgroundImage: "url('/images/doctor interaction2.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             opacity: 0.75,
             zIndex: 1
           }}
@@ -96,16 +97,24 @@ async function DoctorDetailContent({ id }: { id: string }) {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 100%)',
+            background: 'linear-gradient(135deg, rgba(4, 63, 101, 0.8) 0%, rgba(8, 113, 178, 0.7) 60%, rgba(149, 200, 62, 0.25) 100%)',
             zIndex: 2
           }}
         />
-        <div className="container" style={{ position: 'relative', zIndex: 3, padding: '4rem 0' }}>
-          <div className={styles.backBtnWrapper}>
-            <Link href="/departments" className={styles.backBtn}>
-              <ArrowLeft size={16} /> Back to Departments
-            </Link>
-          </div>
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '120px',
+            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(149, 200, 62, 0.08) 35%, rgba(149, 200, 62, 0.2) 70%, var(--background) 100%)',
+            pointerEvents: 'none',
+            zIndex: 3
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 4, padding: '2rem 0' }}>
+          <BackButton />
           <h1 className={styles.title}>{doctor.name}</h1>
           <p className={styles.subtitle}>{doctor.specialty} • {dept ? dept.name : doctor.department.toUpperCase()}</p>
         </div>
