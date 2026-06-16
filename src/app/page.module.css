@@ -230,16 +230,17 @@
 
 .graphicChart {
   height: 120px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
   align-items: flex-end;
-  gap: 8px;
   margin-bottom: 1.5rem;
   border-bottom: 2px solid var(--border);
   padding-bottom: 8px;
 }
 
 .chartBar {
-  flex: 1;
+  width: 48px;
   background: linear-gradient(to top, var(--primary) 0%, var(--accent) 100%);
   border-radius: 4px 4px 0 0;
   transition: var(--transition);
@@ -252,8 +253,8 @@
 }
 
 .graphicStats {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   text-align: center;
 }
 

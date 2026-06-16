@@ -80,12 +80,9 @@ export default async function HomePage() {
                 
                 {/* Visual bar chart representing recovery metrics */}
                 <div className={styles.graphicChart}>
-                  <div className={styles.chartBar} style={{ height: '40%' }}></div>
-                  <div className={styles.chartBar} style={{ height: '60%' }}></div>
-                  <div className={styles.chartBar} style={{ height: '75%' }}></div>
-                  <div className={styles.chartBar} style={{ height: '92%' }}></div>
-                  <div className={styles.chartBar} style={{ height: '88%' }}></div>
                   <div className={styles.chartBar} style={{ height: '98%' }}></div>
+                  <div className={styles.chartBar} style={{ height: '88%' }}></div>
+                  <div className={styles.chartBar} style={{ height: '75%' }}></div>
                 </div>
                 
                 <div className={styles.graphicStats}>
