@@ -13,6 +13,7 @@ interface DoctorCardProps {
 export default function DoctorCard({ doctor, compact = false }: DoctorCardProps) {
   return (
     <div className={`${styles.card} ${compact ? styles.compact : ''}`}>
+      <span className={styles.deptBadge}>{doctor.department.toUpperCase()}</span>
       <Link href={`/doctors/${doctor.id}`} target="_blank" className={styles.avatarLink}>
         <div className={styles.avatarContainer}>
           <FallbackImage
@@ -21,7 +22,6 @@ export default function DoctorCard({ doctor, compact = false }: DoctorCardProps)
             alt={doctor.name}
             className={styles.avatarImg}
           />
-          <span className={styles.deptBadge}>{doctor.department.toUpperCase()}</span>
         </div>
       </Link>
 

@@ -1,68 +1,12 @@
-import React from 'react';
-export const unstable_instant = { prefetch: 'static' };
-import { Target, Eye, Sparkles, User, Briefcase, Award } from 'lucide-react';
+import { Target, Eye, Sparkles } from 'lucide-react';
 import styles from './page.module.css';
 import BackButton from '@/components/BackButton';
 
-// Reusable SVG for leadership profiles to ensure high resolution graphics
-const LeadershipAvatar = ({ role }: { role: string }) => {
-  let shirtColor = '#0871B2';
-  let tieColor = '#95C83E';
-  
-  if (role.includes('Medical')) {
-    shirtColor = '#10b981';
-    tieColor = '#f59e0b';
-  } else if (role.includes('Nursing')) {
-    shirtColor = '#d946ef';
-    tieColor = '#6366f1';
-  }
-
-  return (
-    <svg viewBox="0 0 100 100" className={styles.mgmtAvatarSvg} fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="35" r="18" fill="#f87171" />
-      {/* Hair outline */}
-      <path d="M30 35C30 20 70 20 70 35C70 40 65 42 50 42C35 42 30 40 30 35Z" fill="#1e293b" />
-      {/* Suit/Coat */}
-      <path d="M22 80C22 65 32 58 50 58C68 58 78 65 78 80V100H22V80Z" fill="#334155" />
-      {/* Shirt */}
-      <path d="M38 58L50 80L62 58" fill="#ffffff" />
-      {/* Tie */}
-      <path d="M47 58H53L51 76L49 76Z" fill={tieColor} />
-      {/* Stethoscope for Medical Director */}
-      {role.includes('Medical') && (
-        <path d="M35 58C35 68 65 68 65 58" stroke="#cbd5e1" strokeWidth="2.5" fill="none" />
-      )}
-    </svg>
-  );
-};
-
 export default function AboutPage() {
   const timelineMilestones = [
-    { year: '2012', desc: 'VMC Medical Center founded as a small community outpatient clinic in NY.' },
-    { year: '2016', desc: 'Expanded facilities to include specialized Pediatric and Orthopedic surgery wards.' },
-    { year: '2020', desc: 'Inaugurated state-of-the-art ENT diagnostic lab and launched 24/7 emergency services.' },
-    { year: '2025', desc: 'Awarded national clinical excellence accreditation and expanded telemedicine facilities.' }
-  ];
-
-  const managementTeam = [
-    {
-      name: 'Dr. Arthur Vance',
-      role: 'Chief Executive Officer',
-      image: '/images/doc10.jpg',
-      bio: 'Dr. Vance has over 20 years of experience in healthcare management and clinical operations, steering VMC towards digital integration and patient care excellence.'
-    },
-    {
-      name: 'Dr. Helen Morris',
-      role: 'Medical Director',
-      image: '/images/doc11.jpg',
-      bio: 'Dr. Morris oversees clinical protocols and specialist compliance, ensuring VMC maintains its leading position in surgery safety and evidence-based diagnostic protocols.'
-    },
-    {
-      name: 'Sarah Jenkins, RN',
-      role: 'Head of Operations & Nursing',
-      image: '/images/doc1.jpg',
-      bio: 'Sarah leads our primary care nursing staff and patient admissions operations, focusing on compassionate outpatient hospitality and efficient clinic flow.'
-    }
+    { year: '2024', desc: 'VMC Medical Center founded as a small community outpatient clinic in Paravoor, Aluva, Kerala.' },
+    { year: '2025', desc: 'Expanded facilities to include specialized Pediatric and Orthopedic surgery wards.' },
+    { year: '2026', desc: 'Inaugurated state-of-the-art ENT diagnostic lab and launched 24/7 emergency services.' }
   ];
 
   return (
@@ -82,6 +26,7 @@ export default function AboutPage() {
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
@@ -89,8 +34,6 @@ export default function AboutPage() {
             right: 0,
             bottom: 0,
             backgroundImage: "url('/images/doctor interaction.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             opacity: 0.75,
             zIndex: 1
           }}
@@ -194,33 +137,6 @@ export default function AboutPage() {
                 Integrity, Empathy, Safety, Collaboration, and Continuous Improvement. We treat every patient with the dignity and care we would extend to our own family.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Management Leadership */}
-      <section className={styles.mgmtSection}>
-        <div className="container">
-          <div className={styles.mgmtHeader}>
-            <h2 className={styles.mgmtTitle}>Leadership & Management</h2>
-            <p className={styles.mgmtSubtitle}>
-              Our executive board is committed to maintaining VMC&apos;s standard of medical ethics and clinical safety.
-            </p>
-          </div>
-
-          <div className={styles.mgmtGrid}>
-            {managementTeam.map((member) => (
-              <div key={member.name} className={styles.mgmtCard}>
-                <div className={styles.mgmtAvatar}>
-                  <img src={member.image} alt={member.name} className={styles.mgmtAvatarImg} />
-                </div>
-                <div className={styles.mgmtInfo}>
-                  <h3 className={styles.mgmtName}>{member.name}</h3>
-                  <p className={styles.mgmtRole}>{member.role}</p>
-                  <p className={styles.mgmtBio}>{member.bio}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

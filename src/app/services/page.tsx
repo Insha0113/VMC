@@ -110,6 +110,7 @@ export default function ServicesPage() {
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
@@ -117,8 +118,6 @@ export default function ServicesPage() {
             right: 0,
             bottom: 0,
             backgroundImage: "url('/images/hospital front.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             opacity: 0.7,
             zIndex: 1
           }}

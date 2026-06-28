@@ -46,7 +46,7 @@
 
 @media (max-width: 767px) {
   :root {
-    --header-min-height: 50vh;
+    --header-min-height: 75vh;
   }
 }
 

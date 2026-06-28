@@ -191,7 +191,7 @@ export default function Chatbot() {
           </button>
           <div className={styles.speechContent}>
             <span className={styles.speechAvatar}>🙋</span>
-            <p className={styles.speechText}>Hi, I'm VMC Assistant. You can ask me anything related to VMC!</p>
+            <p className={styles.speechText}>Hi, I'm Riya, VMC Assistant. You can ask me anything related to VMC!</p>
           </div>
         </div>
       )}

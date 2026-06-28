@@ -37,6 +37,7 @@ export default async function DepartmentsPage() {
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
@@ -44,8 +45,6 @@ export default async function DepartmentsPage() {
             right: 0,
             bottom: 0,
             backgroundImage: "url('/images/doctor interaction.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             opacity: 0.75,
             zIndex: 1
           }}

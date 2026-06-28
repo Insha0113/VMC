@@ -23,6 +23,7 @@ export default function BookingPage() {
         }}
       >
         <div 
+          className="responsive-banner-bg"
           style={{
             position: 'absolute',
             top: 0,
@@ -30,8 +31,6 @@ export default function BookingPage() {
             right: 0,
             bottom: 0,
             backgroundImage: "url('/images/doctor interaction2.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             opacity: 0.75,
             zIndex: 1
           }}

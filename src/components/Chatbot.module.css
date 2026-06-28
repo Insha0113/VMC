@@ -306,7 +306,7 @@
   background-color: var(--accent-hover);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .window {
     width: min(330px, calc(100vw - 2rem));
     height: 480px;
@@ -317,6 +317,18 @@
   .wrapper {
     bottom: 1rem;
     right: 1rem;
+  }
+  .bubble {
+    width: 42px;
+    height: 42px;
+  }
+  .bubble svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .pulse {
+    width: 42px;
+    height: 42px;
   }
 }
 
@@ -406,8 +418,9 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .speechBubble {
+    bottom: 60px;
     width: min(270px, calc(100vw - 2rem));
     right: 0;
   }

@@ -130,7 +130,7 @@ export default async function HomePage() {
                     backgroundPosition: 'center'
                   } : undefined}
                 >
-                  <h3 style={{ textTransform: 'uppercase', fontSize: '1.5rem', letterSpacing: '1px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{dept.name}</h3>
+                  <h3 style={{ textTransform: 'uppercase', fontSize: '1.5rem', letterSpacing: '1px', textShadow: '0 2px 4px rgba(0,0,0,0.3)', textAlign: 'center', padding: '0 1rem' }}>{dept.name}</h3>
                 </div>
                 <div className={styles.deptBody}>
                   <h3 className={styles.deptName}>{dept.name}</h3>
