@@ -31,7 +31,7 @@ export default function Chatbot() {
       {
         id: 'welcome',
         sender: 'bot',
-        text: "Hi , I'm Arjun, VMC Assistant. You can ask me anything related to VMC!",
+        text: "Hi, I'm Riya, VMC Assistant. You can ask me anything related to VMC!",
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }
     ]);
@@ -191,7 +191,7 @@ export default function Chatbot() {
           </button>
           <div className={styles.speechContent}>
             <span className={styles.speechAvatar}>🙋</span>
-            <p className={styles.speechText}>Hi , I'm Arjun, VMC Assistant. You can ask me anything related to VMC!</p>
+            <p className={styles.speechText}>Hi, I'm VMC Assistant. You can ask me anything related to VMC!</p>
           </div>
         </div>
       )}
@@ -218,7 +218,7 @@ export default function Chatbot() {
                 <Bot size={20} color="white" />
               </div>
               <div>
-                <h4 className={styles.title}>Arjun - Medical Assistant</h4>
+                <h4 className={styles.title}>Riya - Medical Assistant</h4>
                 <div className={styles.status}>
                   <span className={styles.statusDot}></span>
                   Online - 24/7 Guidance
@@ -240,7 +240,7 @@ export default function Chatbot() {
                 }`}
               >
                 {m.sender === 'bot' && (
-                  <div className={styles.msgAvatar} aria-label="Arjun Avatar">
+                  <div className={styles.msgAvatar} aria-label="Riya Avatar">
                     🙋
                   </div>
                 )}
@@ -262,7 +262,7 @@ export default function Chatbot() {
 
             {isTyping && (
               <div className={`${styles.msgWrapper} ${styles.msgWrapperBot}`}>
-                <div className={styles.msgAvatar} aria-label="Arjun Avatar">
+                <div className={styles.msgAvatar} aria-label="Riya Avatar">
                   🙋
                 </div>
                 <div className={`${styles.msg} ${styles.msgBot}`} style={{ padding: '0.5rem 1rem' }}>
