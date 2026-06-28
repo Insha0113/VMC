@@ -92,7 +92,13 @@ export default function BookingForm() {
           }
         } else {
           if (deptParam) {
-            setSelectedDept(deptParam.toLowerCase());
+            const lowerDept = deptParam.toLowerCase();
+            setSelectedDept(lowerDept);
+            // Auto-select doctor if only one in department
+            const filtered = docsData.filter((d: Doctor) => d.department.toLowerCase() === lowerDept);
+            if (filtered.length === 1) {
+              setSelectedDoctor(filtered[0]);
+            }
           }
           if (docParam && docsData.length > 0) {
             const doc = docsData.find((d: Doctor) => d.id === docParam);
@@ -114,8 +120,17 @@ export default function BookingForm() {
   // Handle department change
   const handleDeptSelect = (deptSlug: string) => {
     setSelectedDept(deptSlug);
-    setSelectedDoctor(null); // Reset doctor
     setSelectedSlot('');     // Reset slot
+    
+    // Auto-select doctor if exactly one doctor in this department
+    const filtered = doctors.filter(
+      (doc) => doc.department.toLowerCase() === deptSlug.toLowerCase()
+    );
+    if (filtered.length === 1) {
+      setSelectedDoctor(filtered[0]);
+    } else {
+      setSelectedDoctor(null);
+    }
   };
 
   // Filter doctors based on selected department
@@ -125,9 +140,9 @@ export default function BookingForm() {
 
   // Available Time Slots Mock (can be filtered by doctor later)
   const timeSlots = [
-    '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', 
-    '11:00 AM', '11:30 AM', '02:00 PM', '02:30 PM', 
-    '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM'
+    '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+    '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM',
+    '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM'
   ];
 
   // Helper: Verify if date matches doctor availability
@@ -145,8 +160,101 @@ export default function BookingForm() {
     }
     if (!selectedDoctor || !selectedDate) return true;
     const day = getDayName(selectedDate);
-    return selectedDoctor.availability.includes(day);
+    
+    return selectedDoctor.availability.some((avail) => {
+      const availLower = avail.toLowerCase();
+      const dayLower = day.toLowerCase();
+      
+      // Exact substring match (e.g., "Wednesday" in "Wednesday: 5.00 pm onwards")
+      if (availLower.includes(dayLower)) {
+        return true;
+      }
+      
+      // Range check "Monday to Saturday" or "Monday - Saturday"
+      if (availLower.includes('monday') && (availLower.includes('saturday') || availLower.includes('sat')) && (availLower.includes('-') || availLower.includes('to'))) {
+        return dayLower !== 'sunday';
+      }
+      
+      // Range check "Monday to Friday" or "Monday - Friday"
+      if (availLower.includes('monday') && (availLower.includes('friday') || availLower.includes('fri')) && (availLower.includes('-') || availLower.includes('to'))) {
+        return dayLower !== 'saturday' && dayLower !== 'sunday';
+      }
+      
+      return false;
+    });
   };
+
+  // Helper: Parse slot time string to minutes from midnight
+  const parseTimeToMinutes = (timeStr: string): number => {
+    const cleaned = timeStr.toLowerCase().trim();
+    const isPM = cleaned.includes('pm') || cleaned.includes('p.m.');
+    const isAM = cleaned.includes('am') || cleaned.includes('a.m.');
+    
+    const match = cleaned.match(/(\d+)(?:[:.](\d+))?/);
+    if (!match) return 0;
+    
+    let hours = parseInt(match[1], 10);
+    const minutes = match[2] ? parseInt(match[2], 10) : 0;
+    
+    if (isPM && hours < 12) {
+      hours += 12;
+    } else if (isAM && hours === 12) {
+      hours = 0;
+    } else if (!isAM && !isPM && hours < 8) {
+      hours += 12;
+    }
+    
+    return hours * 60 + minutes;
+  };
+
+  // Helper: Determine if a specific slot is within the doctor's custom availability
+  const isSlotAvailableForDoctor = (slot: string) => {
+    if (!selectedDate || !selectedDoctor) return true;
+    const day = getDayName(selectedDate);
+    const dayLower = day.toLowerCase();
+    
+    const matchingAvail = selectedDoctor.availability.find(avail => {
+      const aLower = avail.toLowerCase();
+      if (aLower.includes(dayLower)) return true;
+      if (aLower.includes('monday') && (aLower.includes('saturday') || aLower.includes('sat')) && (aLower.includes('-') || aLower.includes('to'))) {
+        return dayLower !== 'sunday';
+      }
+      if (aLower.includes('monday') && (aLower.includes('friday') || aLower.includes('fri')) && (aLower.includes('-') || aLower.includes('to'))) {
+        return dayLower !== 'saturday' && dayLower !== 'sunday';
+      }
+      return false;
+    });
+    
+    if (!matchingAvail) return false;
+    if (!matchingAvail.includes(':')) return true; // Available all day if no time constraint
+    
+    const parts = matchingAvail.split(':');
+    const timePart = parts.slice(1).join(':').toLowerCase();
+    
+    let startMinutes = 0;
+    let endMinutes = 24 * 60;
+    
+    if (timePart.includes('to') || timePart.includes('-')) {
+      const timeSplit = timePart.includes('to') ? timePart.split('to') : timePart.split('-');
+      startMinutes = parseTimeToMinutes(timeSplit[0]);
+      endMinutes = parseTimeToMinutes(timeSplit[1]);
+    } else if (timePart.includes('onwards')) {
+      const timeSplit = timePart.split('onwards')[0];
+      startMinutes = parseTimeToMinutes(timeSplit);
+      endMinutes = 24 * 60;
+    }
+    
+    const slotMinutes = parseTimeToMinutes(slot);
+    return slotMinutes >= startMinutes && slotMinutes <= endMinutes;
+  };
+
+  // Smooth scroll step transition gliding
+  useEffect(() => {
+    const wrapper = document.querySelector(`.${styles.wrapper}`);
+    if (wrapper) {
+      wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [step]);
 
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -456,7 +564,7 @@ export default function BookingForm() {
                   <button
                     key={slot}
                     type="button"
-                    disabled={!selectedDate || !isDoctorAvailableOnDate()}
+                    disabled={!selectedDate || !isDoctorAvailableOnDate() || !isSlotAvailableForDoctor(slot)}
                     className={`${styles.slotBtn} ${selectedSlot === slot ? styles.slotBtnActive : ''}`}
                     onClick={() => setSelectedSlot(slot)}
                   >

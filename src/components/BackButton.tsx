@@ -9,7 +9,7 @@ export default function BackButton() {
 
   useEffect(() => {
     // Force immediate scroll to top on component mount
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
   }, []);
 
   return (

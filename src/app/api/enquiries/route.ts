@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getEnquiries, saveEnquiry } from '@/lib/db';
+import { sendNotificationEmail } from '@/lib/mail';
 
 function checkAuth(request: Request) {
   const authHeader = request.headers.get('Authorization');
@@ -43,6 +44,14 @@ export async function POST(request: Request) {
     };
     
     const saved = await saveEnquiry(newEnquiry);
+    
+    // Send email alert to admin (inshanouri@gmail.com)
+    try {
+      await sendNotificationEmail(saved, 'enquiry');
+    } catch (mailErr) {
+      console.error('Failed to send enquiry notification email:', mailErr);
+    }
+    
     return NextResponse.json(saved, { status: 201 });
   } catch (error) {
     console.error('API Enquiries POST Error:', error);

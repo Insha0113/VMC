@@ -20,7 +20,7 @@
   position: relative;
   width: 100%;
   padding-top: 75%; /* 4:3 Aspect Ratio */
-  background-color: var(--background);
+  background-color: var(--card-bg);
 }
 
 .avatarLink {
@@ -36,8 +36,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center center;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

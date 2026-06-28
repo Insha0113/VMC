@@ -80,7 +80,7 @@
   position: relative;
   width: 100%;
   padding-top: 100%; /* 1:1 square ratio for avatar focus */
-  background-color: var(--background);
+  background-color: var(--card-bg);
 }
 
 .profileImg {
@@ -89,8 +89,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center center;
 }
 
 .quickContact {

@@ -12,7 +12,11 @@ const deptImages: Record<string, string> = {
   pediatrics: '/images/pediatric.jpg',
   ent: '/images/ent.jpg',
   orthopedics: '/images/orthopedics image.jpg',
-  dermatology: '/images/dermatology.jpg'
+  dermatology: '/images/dermatology.jpg',
+  'diabetic-care': '/images/diabetic care.jpg',
+  gastroenterology: '/images/doctor interaction.jpg',
+  gynaecology: '/images/doctor interaction2.jpg',
+  radiology: '/images/xray.jpg'
 };
 
 

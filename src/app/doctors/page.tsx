@@ -65,7 +65,7 @@ export default async function DoctorsPage() {
           <BackButton />
           <h1 className={styles.title}>Our Specialists</h1>
           <p className={styles.subtitle}>
-            Meet our team of board-certified clinical experts, consultants, and surgical specialists dedicated to your family's health and wellness.
+            Meet our team of board-certified clinical experts, consultants, and surgical specialists dedicated to your family&apos;s health and wellness.
           </p>
         </div>
       </section>

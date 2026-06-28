@@ -2,12 +2,12 @@ import React from 'react';
 export const unstable_instant = { prefetch: 'static' };
 import Link from 'next/link';
 import { getDoctors, getDepartments } from '@/lib/db';
-import DoctorCard from '@/components/DoctorCard';
 import QuickContactForm from '@/components/QuickContactForm';
 import ReviewsMarquee from '@/components/ReviewsMarquee';
 import HeroVideo from '@/components/HeroVideo';
+import TrustCounterAnimation from '@/components/TrustCounterAnimation';
+import DoctorsMarquee from '@/components/DoctorsMarquee';
 import { 
-  HeartHandshake, 
   ShieldCheck, 
   Activity, 
   Stethoscope, 
@@ -18,7 +18,13 @@ import {
   Mail, 
   ArrowRight,
   TrendingUp,
-  Home
+  Home,
+  Award,
+  HeartPulse,
+  Clock,
+  UserCheck,
+  HelpCircle,
+  CheckCircle2
 } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -26,7 +32,11 @@ const deptImages: Record<string, string> = {
   pediatrics: '/images/pediatric.jpg',
   ent: '/images/ent.jpg',
   orthopedics: '/images/orthopedics image.jpg',
-  dermatology: '/images/dermatology.jpg'
+  dermatology: '/images/dermatology.jpg',
+  'diabetic-care': '/images/diabetic care.jpg',
+  gastroenterology: '/images/doctor interaction.jpg',
+  gynaecology: '/images/doctor interaction2.jpg',
+  radiology: '/images/xray.jpg'
 };
 
 export default async function HomePage() {
@@ -64,42 +74,30 @@ export default async function HomePage() {
                   Book Service
                 </Link>
               </div>
+
+              {/* Enriched Content: Hero Stats */}
+              <div className={styles.heroStats}>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>15+</span>
+                  <span className={styles.statLabel}>Specialty Units</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>50k+</span>
+                  <span className={styles.statLabel}>Patients Served</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>24/7</span>
+                  <span className={styles.statLabel}>Emergency Care</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>99%</span>
+                  <span className={styles.statLabel}>Recovery Rating</span>
+                </div>
+              </div>
             </div>
             
             <div className={styles.heroVisual}>
-              <div className={styles.medicalGraphic}>
-                <div className={styles.graphicHeader}>
-                  <div className={styles.graphicIcon} style={{ backgroundColor: 'transparent', padding: '2px' }}>
-                    <img src="/images/vmc logo.png" alt="VMC Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                  </div>
-                  <div>
-                    <h3 className={styles.graphicTitle}>VMC Medical center</h3>
-                    <p className={styles.graphicSub}>Weekly Patient Recovery Rate</p>
-                  </div>
-                </div>
-                
-                {/* Visual bar chart representing recovery metrics */}
-                <div className={styles.graphicChart}>
-                  <div className={styles.chartBar} style={{ height: '98%' }}></div>
-                  <div className={styles.chartBar} style={{ height: '88%' }}></div>
-                  <div className={styles.chartBar} style={{ height: '75%' }}></div>
-                </div>
-                
-                <div className={styles.graphicStats}>
-                  <div>
-                    <div className={styles.statVal}>98%</div>
-                    <div className={styles.statLabel}>Success Rate</div>
-                  </div>
-                  <div>
-                    <div className={styles.statVal}>15k+</div>
-                    <div className={styles.statLabel}>Happy Patients</div>
-                  </div>
-                  <div>
-                    <div className={styles.statVal}>24/7</div>
-                    <div className={styles.statLabel}>Emergency Care</div>
-                  </div>
-                </div>
-              </div>
+              <TrustCounterAnimation />
             </div>
           </div>
         </div>
@@ -154,6 +152,34 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
+
+          {/* Enriched Content: Why Choose Our Specialties */}
+          <div className={styles.deptHighlights}>
+            <h3 className={styles.deptHighlightTitle}>Why Choose VMC Specialty Units?</h3>
+            <div className={styles.deptHighlightGrid}>
+              <div className={styles.deptHighlightCard}>
+                <Award className={styles.deptHighlightIcon} size={24} />
+                <div className={styles.deptHighlightContent}>
+                  <h4>Senior Board Consultants</h4>
+                  <p>Direct consults and guidance with senior, board-certified clinicians who are active leaders in their medical specialties.</p>
+                </div>
+              </div>
+              <div className={styles.deptHighlightCard}>
+                <HeartPulse className={styles.deptHighlightIcon} size={24} />
+                <div className={styles.deptHighlightContent}>
+                  <h4>Integrative Diagnostic Care</h4>
+                  <p>Fully coordinated treatments spanning pediatric care, dermatology, orthopedics, and diabetes, backed by our in-house lab.</p>
+                </div>
+              </div>
+              <div className={styles.deptHighlightCard}>
+                <CheckCircle2 className={styles.deptHighlightIcon} size={24} />
+                <div className={styles.deptHighlightContent}>
+                  <h4>Patient-Centered Recovery</h4>
+                  <p>Continuous recovery tracking and personalized rehabilitation plans designed around your family's daily lifestyle.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -207,6 +233,19 @@ export default async function HomePage() {
               <p className={styles.serviceDesc}>Get professional medical consultations, primary health screenings, and nursing support in the comfort of your home.</p>
             </div>
           </div>
+
+          {/* Enriched Content: Services callout box */}
+          <div className={styles.servicesCallout}>
+            <div className={styles.servicesCalloutContent}>
+              <h4>Need a Customized Family Health Plan or Routine Checkup?</h4>
+              <p>We provide comprehensive health screening packages for corporate teams, working professionals, senior citizens, and young children. Our plans include full lab screenings, diagnostic imaging, and direct specialist consultations all scheduled in one visit.</p>
+            </div>
+            <div className={styles.servicesCalloutBtn}>
+              <Link href="/book?type=service" className={styles.btnPrimary}>
+                Request Health Screening
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -220,16 +259,32 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Doctor horizontal moving marquee */}
-        <div className={styles.docMarqueeContainer}>
-          <div className={styles.docOverlayLeft}></div>
-          <div className={styles.docOverlayRight}></div>
-          <div className={styles.docMarqueeTrack}>
-            {[...featuredDoctors, ...featuredDoctors].map((doc, idx) => (
-              <div key={`${doc.id}-${idx}`} className={styles.docMarqueeCard}>
-                <DoctorCard doctor={doc} compact={true} />
+        <DoctorsMarquee doctors={featuredDoctors} />
+
+        {/* Enriched Content: Doctor Philosophy */}
+        <div className="container">
+          <div className={styles.doctorPhilosophy}>
+            <div className={styles.philosophyCard}>
+              <div className={styles.philosophyIcon}>
+                <Clock size={28} />
               </div>
-            ))}
+              <h4>Minimal Wait Times</h4>
+              <p>We honor your time. Our scheduling algorithms ensure that you meet your doctor with minimal delay in the waiting room.</p>
+            </div>
+            <div className={styles.philosophyCard}>
+              <div className={styles.philosophyIcon}>
+                <UserCheck size={28} />
+              </div>
+              <h4>Empathetic Consults</h4>
+              <p>Our specialists listen to you. We believe that proper diagnosis begins with fully understanding a patient's concerns and clinical history.</p>
+            </div>
+            <div className={styles.philosophyCard}>
+              <div className={styles.philosophyIcon}>
+                <HeartPulse size={28} />
+              </div>
+              <h4>Evidence-Based Treatment</h4>
+              <p>All VMC medical guidelines follow international evidence-based standards, avoiding unnecessary prescriptions or procedures.</p>
+            </div>
           </div>
         </div>
 
@@ -301,6 +356,49 @@ export default async function HomePage() {
 
             {/* Quick Form Column */}
             <QuickContactForm />
+          </div>
+
+          {/* Enriched Content: Frequently Asked Questions */}
+          <div className={styles.faqContainer}>
+            <h3 className={styles.faqTitle}>Frequently Asked Questions</h3>
+            <div className={styles.faqGrid}>
+              <div className={styles.faqCard}>
+                <div className={styles.faqQuestion}>
+                  <HelpCircle className={styles.faqQuestionIcon} size={18} />
+                  <span>How can I schedule a home doctor visit?</span>
+                </div>
+                <p className={styles.faqAnswer}>
+                  You can easily schedule a home visit by clicking "Book Service" at the top of the page, selecting "Home Visit", and choosing your preferred slot. Alternatively, call us at 9947653954 for immediate scheduling support.
+                </p>
+              </div>
+              <div className={styles.faqCard}>
+                <div className={styles.faqQuestion}>
+                  <HelpCircle className={styles.faqQuestionIcon} size={18} />
+                  <span>How quickly can I receive my laboratory test results?</span>
+                </div>
+                <p className={styles.faqAnswer}>
+                  Most routine clinical blood panels, ECG, and digital X-ray scans are processed and emailed to you or uploaded to your profile within 3 to 6 hours of sample collection. Complex pathology reports may take up to 24 hours.
+                </p>
+              </div>
+              <div className={styles.faqCard}>
+                <div className={styles.faqQuestion}>
+                  <HelpCircle className={styles.faqQuestionIcon} size={18} />
+                  <span>Do I need a prior appointment for the Outpatient Department (OPD)?</span>
+                </div>
+                <p className={styles.faqAnswer}>
+                  Walk-ins are always welcome at VMC Medical Center. However, to guarantee meeting a specific senior consultant in Ped, Ortho, ENT, or Dermatology, we highly recommend scheduling an appointment online beforehand.
+                </p>
+              </div>
+              <div className={styles.faqCard}>
+                <div className={styles.faqQuestion}>
+                  <HelpCircle className={styles.faqQuestionIcon} size={18} />
+                  <span>What emergency clinical services are available 24/7?</span>
+                </div>
+                <p className={styles.faqAnswer}>
+                  Our emergency room is equipped for acute trauma care, minor surgical procedures, sudden cardiac monitoring, pediatric emergencies, and immediate intravenous therapies. Our diagnostic labs and pharmacy remain operational 24/7.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

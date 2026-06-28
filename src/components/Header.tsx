@@ -61,7 +61,9 @@ export default function Header() {
     { label: 'Contact Us', href: '/contact' }
   ];
 
-  const navItems = isAdmin
+  const showAdminLink = isAdmin && pathname.startsWith('/admin');
+
+  const navItems = showAdminLink
     ? [...baseNavItems, { label: 'Admin Dashboard', href: '/admin' }]
     : baseNavItems;
 

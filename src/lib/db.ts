@@ -118,191 +118,167 @@ const DEFAULT_DEPARTMENTS: Department[] = [
       'Cosmetic Dermatology'
     ],
     icon: 'Sparkles'
+  },
+  {
+    id: 'dept-5',
+    slug: 'diabetic-care',
+    name: 'Diabetic Care',
+    description: 'Comprehensive blood sugar diagnostics, customized diet mapping, insulin guidelines, and proactive counseling for diabetic management.',
+    services: [
+      'Blood Sugar Profiling',
+      'Dietary Consultation',
+      'Insulin Counseling',
+      'Continuous Glucose Monitoring'
+    ],
+    icon: 'Activity'
+  },
+  {
+    id: 'dept-6',
+    slug: 'gastroenterology',
+    name: 'Gastroenterology',
+    description: 'Advanced treatment for digestive tract disorders, stomach issues, liver diseases, and colorectal diagnostics.',
+    services: [
+      'Acidity & Reflux Management',
+      'Liver Function Consults',
+      'Digestive Health Screenings'
+    ],
+    icon: 'HeartHandshake'
+  },
+  {
+    id: 'dept-7',
+    slug: 'gynaecology',
+    name: 'Gynaecology & Obstetrics',
+    description: 'Dedicated women\'s health services, prenatal care, obstetric screenings, and advanced minimally invasive laparoscopic procedures.',
+    services: [
+      'Prenatal & Antenatal Care',
+      'Laparoscopic Gynaecologic Surgery',
+      'Infertility Consultations'
+    ],
+    icon: 'Sparkles'
+  },
+  {
+    id: 'dept-8',
+    slug: 'radiology',
+    name: 'Radiology & General Practice',
+    description: 'Primary health consults, general diagnostic support, ultrasound scans, and digital X-ray processing.',
+    services: [
+      'General Health Consults',
+      'Diagnostic Ultrasound (USG)',
+      'Digital X-Ray Scans'
+    ],
+    icon: 'Layers'
   }
 ];
 
 const DEFAULT_DOCTORS: Doctor[] = [
   {
     id: 'doc-1',
-    name: 'Dr. Sarah Jenkins',
-    specialty: 'Senior Orthopedic Surgeon',
-    department: 'orthopedics',
-    email: 'sarah.jenkins@vmc.com',
-    phone: '+1 (555) 019-2834',
-    image: '/images/doc1.jpg',
-    experience: '14+ Years',
-    education: 'MD, FACS - Johns Hopkins University',
-    availability: ['Monday', 'Wednesday', 'Thursday'],
-    bio: 'Dr. Jenkins specializes in joint reconstruction and minimally invasive arthroscopic surgeries. She is dedicated to helping patients return to their active lifestyles.'
+    name: 'Dr Abid Babu',
+    specialty: 'Consultant Medical Gastroenterology',
+    department: 'gastroenterology',
+    email: 'abid.babu@vmc.com',
+    phone: '9947653954',
+    image: '/images/Dr Abid Babu Medical Gastroenterology.jpg',
+    experience: '10+ Years',
+    education: 'MBBS, MD(General Medicine), DrNB(Medical Gastroenterology)',
+    availability: [
+      'Wednesday: 5.00 pm onwards'
+    ],
+    bio: 'Dr. Abid Babu specializes in general medicine and medical gastroenterology. He has extensive expertise in treating stomach, liver, and intestinal disorders.'
   },
   {
     id: 'doc-2',
-    name: 'Dr. Michael Chen',
-    specialty: 'Pediatric Specialist',
-    department: 'pediatrics',
-    email: 'michael.chen@vmc.com',
-    phone: '+1 (555) 019-3982',
-    image: '/images/doc2.jpg',
-    experience: '10+ Years',
-    education: 'MD - Harvard Medical School',
-    availability: ['Tuesday', 'Wednesday', 'Friday'],
-    bio: 'Dr. Chen is passionate about early childhood development and preventive care. He strives to make every clinic visit comfortable and stress-free for kids.'
+    name: 'Dr Aswanikumari S',
+    specialty: 'Senior Diabetologist',
+    department: 'diabetic-care',
+    email: 'aswanikumari@vmc.com',
+    phone: '9947653954',
+    image: '/images/Dr Aswanikumari S Senior Diabetologist.jpg',
+    experience: '15+ Years',
+    education: 'MBBS, MD(Diabetology)',
+    availability: [
+      'Thursday: 3.00 pm to 6.00 pm'
+    ],
+    bio: 'Dr. Aswanikumari S is a senior diabetologist with over 15 years of experience in managing complex diabetes cases, lifestyle modification, and preventative care.'
   },
   {
     id: 'doc-3',
-    name: 'Dr. Emily Watson',
-    specialty: 'ENT Consultant',
-    department: 'ent',
-    email: 'emily.watson@vmc.com',
-    phone: '+1 (555) 019-4721',
-    image: '/images/doc3.jpg',
+    name: 'Dr Bididha Biswas',
+    specialty: 'Consultant Gynaecologist & Obstetrician',
+    department: 'gynaecology',
+    email: 'bididha.biswas@vmc.com',
+    phone: '9947653954',
+    image: '/images/Dr Bididha Biswas gynaecologist andobstetrician and laproscopy surgeon.jpg',
     experience: '12+ Years',
-    education: 'MD - University of California, San Francisco',
-    availability: ['Monday', 'Tuesday', 'Friday'],
-    bio: 'Dr. Watson has extensive expertise in endoscopic sinus surgery and pediatric otolaryngology. She is committed to providing evidence-based, compassionate care.'
+    education: 'MBBS, MS, DNB, MRCOG',
+    availability: [
+      'Monday: 5.00 pm onwards',
+      'Wednesday: 5.00 pm onwards',
+      'Friday: 5.00 pm onwards'
+    ],
+    bio: 'Dr. Bididha Biswas is a highly qualified consultant gynaecologist, obstetrician, and laparoscopic surgeon specializing in women\'s health and minimally invasive surgeries.'
   },
   {
     id: 'doc-4',
-    name: 'Dr. Robert Carter',
-    specialty: 'Sports Medicine & Joint Care',
-    department: 'orthopedics',
-    email: 'robert.carter@vmc.com',
-    phone: '+1 (555) 019-5831',
-    image: '/images/doc4.jpg',
+    name: 'Dr Namitha Raj',
+    specialty: 'General Practitioner & Dept of Radiology',
+    department: 'radiology',
+    email: 'namitha.raj@vmc.com',
+    phone: '9947653954',
+    image: '/images/Dr Namitha Raj Dept of Radiology Genral Practitioner.jpg',
     experience: '8+ Years',
-    education: 'MD - Stanford Medical School',
-    availability: ['Tuesday', 'Thursday', 'Friday'],
-    bio: 'Dr. Carter treats a wide range of athletic injuries, specializing in shoulder, hip, and knee reconstruction. He works closely with physical therapists to design personalized recovery programs.'
+    education: 'MBBS',
+    availability: [
+      'Monday to Saturday: 5.00 pm onwards'
+    ],
+    bio: 'Dr. Namitha Raj serves as a general practitioner with specialized experience in the department of radiology, providing core diagnostic support and primary care.'
   },
   {
     id: 'doc-5',
-    name: 'Dr. Jessica Taylor',
-    specialty: 'Pediatric Cardiologist',
-    department: 'pediatrics',
-    email: 'jessica.taylor@vmc.com',
-    phone: '+1 (555) 019-6294',
-    image: '/images/doc5.jpg',
-    experience: '15+ Years',
-    education: 'MD - Yale School of Medicine',
-    availability: ['Monday', 'Thursday'],
-    bio: 'Dr. Taylor specializes in pediatric heart conditions and congenital cardiac care, bringing advanced therapeutic solutions with a gentle touch.'
+    name: 'Dr Sahiba Rafi',
+    specialty: 'Skin Specialist',
+    department: 'dermatology',
+    email: 'sahiba.rafi@vmc.com',
+    phone: '9947653954',
+    image: '/images/Dr Sahiba Rafi Skin Soecialist.jpg',
+    experience: '10+ Years',
+    education: 'MBBS, MD Dermatology (AIIMS)',
+    availability: [
+      'Monday to Saturday: 4.00 pm to 6.00 pm'
+    ],
+    bio: 'Dr. Sahiba Rafi is a board-certified dermatologist from AIIMS, specializing in clinical and aesthetic dermatology, acne therapy, and advanced skin care treatments.'
   },
   {
     id: 'doc-6',
-    name: 'Dr. David Kim',
-    specialty: 'Otology & Ear Specialist',
-    department: 'ent',
-    email: 'david.kim@vmc.com',
-    phone: '+1 (555) 019-7235',
-    image: '/images/doc6.jpg',
-    experience: '9+ Years',
-    education: 'MD - Columbia University',
-    availability: ['Wednesday', 'Friday'],
-    bio: 'Dr. Kim is focused on hearing preservation, chronic ear infections, cochlear implants, and balance disorders. He utilizes precision micro-surgery techniques.'
+    name: 'Dr Sonak P',
+    specialty: 'Orthopedic Specialist',
+    department: 'orthopedics',
+    email: 'sonak.p@vmc.com',
+    phone: '9947653954',
+    image: '/images/Dr Sonak P Orthopedics.jpg',
+    experience: '12+ Years',
+    education: 'MBBS, MS(ORTHOPEDICS)',
+    availability: [
+      'Monday: 5.30 pm onwards',
+      'Wednesday: 5.30 pm onwards',
+      'Friday: 5.30 pm onwards'
+    ],
+    bio: 'Dr. Sonak P is an expert orthopedic surgeon specializing in bone and joint treatments, fracture management, and outpatient orthopedic consults.'
   },
   {
     id: 'doc-7',
-    name: 'Dr. Lisa Anderson',
-    specialty: 'Spine Surgeon',
-    department: 'orthopedics',
-    email: 'lisa.anderson@vmc.com',
-    phone: '+1 (555) 019-8239',
-    image: '/images/doc7.jpg',
-    experience: '16+ Years',
-    education: 'MD - University of Pennsylvania',
-    availability: ['Wednesday', 'Thursday'],
-    bio: 'Dr. Anderson is a world-renowned expert in spinal deformity correction, herniated discs, spinal fusion, and motion-preserving spine surgeries.'
-  },
-  {
-    id: 'doc-8',
-    name: 'Dr. James Wilson',
-    specialty: 'General Pediatrician',
+    name: 'Dr Nimisha Sidharth',
+    specialty: 'Pediatric Specialist',
     department: 'pediatrics',
-    email: 'james.wilson@vmc.com',
-    phone: '+1 (555) 019-9284',
-    image: '/images/doc8.jpg',
-    experience: '11+ Years',
-    education: 'MD - Duke University School of Medicine',
-    availability: ['Tuesday', 'Thursday'],
-    bio: 'Dr. Wilson provides comprehensive care for infants, children, and teens. He has a special interest in asthma management and childhood nutrition counseling.'
-  },
-  {
-    id: 'doc-9',
-    name: 'Dr. Olivia Martinez',
-    specialty: 'Rhinology & Sinus Expert',
-    department: 'ent',
-    email: 'olivia.martinez@vmc.com',
-    phone: '+1 (555) 019-1038',
-    image: '/images/doc9.jpg',
-    experience: '13+ Years',
-    education: 'MD - Northwestern University',
-    availability: ['Monday', 'Wednesday'],
-    bio: 'Dr. Martinez specializes in complex sinus disorders, nasal airway obstruction, allergy treatments, and advanced endoscopic skull base surgeries.'
-  },
-  {
-    id: 'doc-10',
-    name: 'Dr. William Thomas',
-    specialty: 'Orthopedic Trauma Specialist',
-    department: 'orthopedics',
-    email: 'william.thomas@vmc.com',
-    phone: '+1 (555) 019-2047',
-    image: '/images/doc10.jpg',
-    experience: '12+ Years',
-    education: 'MD - University of Chicago',
-    availability: ['Monday', 'Friday'],
-    bio: 'Dr. Thomas treats complex fractures, non-unions, and bone infections. He is dedicated to helping patients recover optimal function after severe traumatic injuries.'
-  },
-  {
-    id: 'doc-11',
-    name: 'Dr. Sophia Patel',
-    specialty: 'Pediatric Allergist & Immunologist',
-    department: 'pediatrics',
-    email: 'sophia.patel@vmc.com',
-    phone: '+1 (555) 019-3058',
-    image: '/images/doc11.jpg',
-    experience: '7+ Years',
-    education: 'MD - Cornell University',
-    availability: ['Tuesday', 'Friday'],
-    bio: 'Dr. Patel helps kids manage eczema, food allergies, environmental allergies, and immune disorders. She is dedicated to improving quality of life for families.'
-  },
-  {
-    id: 'doc-12',
-    name: 'Dr. Arjun Nair',
-    specialty: 'Consultant Dermatologist',
-    department: 'dermatology',
-    email: 'arjun.nair@vmc.com',
+    email: 'nimisha.sidharth@vmc.com',
     phone: '9947653954',
-    image: '/images/doc7.jpg',
-    experience: '12+ Years',
-    education: 'MD, DNB - Dermatology, Venereology & Leprosy',
-    availability: ['Monday', 'Wednesday', 'Thursday'],
-    bio: 'Dr. Arjun Nair specializes in clinical dermatology, skin cancer screenings, and advanced laser treatments, with a focus on evidence-based skin wellness.'
-  },
-  {
-    id: 'doc-13',
-    name: 'Dr. Priya Balan',
-    specialty: 'Cosmetic Dermatologist',
-    department: 'dermatology',
-    email: 'priya.balan@vmc.com',
-    phone: '9947653954',
-    image: '/images/doc8.jpg',
-    experience: '8+ Years',
-    education: 'MD - Dermatology, Fellowship in Aesthetic Medicine',
-    availability: ['Tuesday', 'Friday'],
-    bio: 'Dr. Priya Balan is an expert in cosmetic dermatology, scar therapies, chemical peels, and anti-aging skin rejuvenation treatments.'
-  },
-  {
-    id: 'doc-14',
-    name: 'Dr. Marcus Vance',
-    specialty: 'Pediatric Dermatologist',
-    department: 'dermatology',
-    email: 'marcus.vance@vmc.com',
-    phone: '9947653954',
-    image: '/images/doc9.jpg',
-    experience: '10+ Years',
-    education: 'MD - Pediatrics & Dermatology',
-    availability: ['Wednesday', 'Friday'],
-    bio: 'Dr. Marcus Vance focuses on pediatric skin conditions, treating eczema, birthmarks, and pediatric allergies with a gentle, child-focused approach.'
+    image: '/images/Dr Nimisha Sidharth pediatrics.jpg',
+    experience: '9+ Years',
+    education: 'MBBS, MD(PEDIATRICS)',
+    availability: [
+      'Monday to Saturday: 5.00 pm onwards'
+    ],
+    bio: 'Dr. Nimisha Sidharth is a dedicated pediatrician providing comprehensive pediatric care, immunizations, and developmental tracking for infants and children.'
   }
 ];
 

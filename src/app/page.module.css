@@ -501,6 +501,9 @@
 }
 
 @media (max-width: 992px) {
+  .hero {
+    padding: 3rem 0 8rem 0; /* Reduced top padding on tablet */
+  }
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -517,9 +520,39 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .heroStats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+  .deptHighlights {
+    padding: 1.5rem !important;
+    margin-top: 2rem !important;
+  }
+  .deptHighlightGrid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .servicesCallout {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+  .doctorPhilosophy {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin-top: 2rem !important;
+  }
+  .faqGrid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
 }
 
 @media (max-width: 576px) {
+  .hero {
+    padding: 1.5rem 0 6rem 0; /* Extremely low padding-top on small mobile devices to remove empty space */
+  }
   .heroTitle {
     font-size: 2.5rem;
   }
@@ -544,14 +577,88 @@
   }
 }
 
+/* Trust Counter Animation Styles */
+.trustCounterContainer {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trustCounterImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.animationLoader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  z-index: 10;
+}
+
+.loaderSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spinner-rotate 1s linear infinite;
+}
+
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+
 /* Doctor marquee styles */
-.docMarqueeContainer {
+.docMarqueeContainerInteractive {
   position: relative;
   width: 100%;
   overflow: hidden;
   display: flex;
   padding: 1.5rem 0;
   background-color: var(--card-bg);
+}
+
+.docMarqueeScrollContainer {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+  cursor: grab;
+  scroll-behavior: auto;
+}
+
+.docMarqueeScrollContainer:active {
+  cursor: grabbing;
+}
+
+.docMarqueeScrollContainer::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+.docMarqueeTrackInteractive {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  padding: 0.5rem 1rem;
 }
 
 .docOverlayLeft,
@@ -574,30 +681,9 @@
   background: linear-gradient(to left, var(--card-bg) 0%, transparent 100%);
 }
 
-.docMarqueeTrack {
-  display: flex;
-  gap: 2rem;
-  width: max-content;
-  animation: doc-marquee-scroll 40s linear infinite;
-  padding-left: 1rem;
-}
-
-.docMarqueeTrack:hover {
-  animation-play-state: paused;
-}
-
 .docMarqueeCard {
   width: 285px;
   flex-shrink: 0;
-}
-
-@keyframes doc-marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 @media (max-width: 768px) {
@@ -608,4 +694,215 @@
   .docOverlayRight {
     width: 80px;
   }
+}
+
+/* -------------------------------------------------------------
+   NEW LAYOUTS AND COMPONENTS FOR ENRICHED LANDING PAGE CONTENT
+   ------------------------------------------------------------- */
+
+/* Hero Stats Section */
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statNumber {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+/* Specialty Highlights under Departments */
+.deptHighlights {
+  margin-top: 4rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.deptHighlightTitle {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.deptHighlightGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.deptHighlightCard {
+  display: flex;
+  gap: 1rem;
+}
+
+.deptHighlightIcon {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.deptHighlightContent h4 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.deptHighlightContent p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Services Callout Box */
+.servicesCallout {
+  margin-top: 4rem;
+  background: linear-gradient(135deg, rgba(8, 113, 178, 0.04) 0%, rgba(149, 200, 62, 0.04) 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  border: 1px dashed rgba(8, 113, 178, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.servicesCalloutContent {
+  flex: 1;
+}
+
+.servicesCalloutContent h4 {
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.servicesCalloutContent p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.servicesCalloutBtn {
+  flex-shrink: 0;
+}
+
+/* Doctor Philosophy Row */
+.doctorPhilosophy {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.philosophyCard {
+  text-align: center;
+  padding: 1.75rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.philosophyCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.philosophyIcon {
+  color: var(--accent);
+  margin: 0 auto 1rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.philosophyCard h4 {
+  font-size: 1.15rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.philosophyCard p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* FAQ Section */
+.faqContainer {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.faqTitle {
+  font-size: 1.75rem;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.faqCard {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.faqQuestion {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.faqQuestionIcon {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.faqAnswer {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding-left: 1.5rem;
 }
