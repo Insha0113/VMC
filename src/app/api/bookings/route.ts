@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getBookings, saveBooking, updateBookingStatus, deleteBooking, Booking } from '@/lib/db';
-import { sendNotificationEmail } from '@/lib/mail';
+import { sendNotificationEmail, sendPatientConfirmationEmail } from '@/lib/mail';
 
 function checkAuth(request: Request) {
   const authHeader = request.headers.get('Authorization');
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     
     const saved = await saveBooking(newBooking as Booking);
     
-    // Send email alert to admin (inshanouri@gmail.com)
+    // Send email alert to admin (mail.vmcmedical@gmail.com)
     try {
       await sendNotificationEmail(saved, 'booking');
     } catch (mailErr) {
@@ -84,6 +84,17 @@ export async function PUT(request: Request) {
     
     const success = await updateBookingStatus(id, status);
     if (success) {
+      if (status === 'approved') {
+        try {
+          const bookings = await getBookings();
+          const booking = bookings.find(b => b.id === id);
+          if (booking) {
+            await sendPatientConfirmationEmail(booking);
+          }
+        } catch (mailErr) {
+          console.error('Failed to send patient confirmation email:', mailErr);
+        }
+      }
       return NextResponse.json({ success: true, status });
     } else {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });

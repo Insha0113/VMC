@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     
     const saved = await saveEnquiry(newEnquiry);
     
-    // Send email alert to admin (inshanouri@gmail.com)
+    // Send email alert to admin (mail.vmcmedical@gmail.com)
     try {
       await sendNotificationEmail(saved, 'enquiry');
     } catch (mailErr) {

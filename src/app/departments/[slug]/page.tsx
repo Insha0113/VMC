@@ -192,7 +192,7 @@ async function DepartmentDetailContent({ slug }: { slug: string }) {
                 
                 <div style={{ marginTop: '2rem' }}>
                   <Link href={`/book?dept=${department.slug}`} className={styles.btnExplore} style={{ width: '100%', justifyContent: 'center' }}>
-                    <Calendar size={18} /> Book Department Consult
+                    <Calendar size={18} /> Book Department Consultation
                   </Link>
                 </div>
               </div>

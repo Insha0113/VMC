@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   title: "VMC Medical Center | Clinical Excellence & Compassionate Care",
   description: "VMC Medical Center provides top-tier medical services in Orthopedics, Pediatrics, and ENT. Schedule an appointment with our expert consultants today.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/vmc logo.png",
   },
 };
 

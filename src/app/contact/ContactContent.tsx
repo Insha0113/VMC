@@ -100,8 +100,8 @@ export default function ContactContent() {
                     </div>
                     <div className={styles.details}>
                       <h4>Phone Number</h4>
-                      <p>General Enquiry: <a href="tel:9947653954" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>9947653954</a></p>
-                      <p>Emergency Hotline: <a href="tel:9947653954" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>9947653954</a> (24/7)</p>
+                      <p>General Enquiry: <a href="tel:9633248480" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>9633248480</a></p>
+                      <p>Emergency Hotline: <a href="tel:9633248480" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>9633248480</a> (24/7)</p>
                     </div>
                   </div>
 
@@ -111,7 +111,7 @@ export default function ContactContent() {
                     </div>
                     <div className={styles.details}>
                       <h4>Email Support</h4>
-                      <p><a href="mailto:vmcclinic@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>vmcclinic@gmail.com</a></p>
+                      <p><a href="mailto:mail.vmcmedical@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>mail.vmcmedical@gmail.com</a></p>
                     </div>
                   </div>
 
@@ -142,7 +142,7 @@ export default function ContactContent() {
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
+                  <a href="https://www.instagram.com/vmcmedicalcenter/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
                     <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>

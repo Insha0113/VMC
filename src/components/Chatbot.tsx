@@ -124,7 +124,7 @@ export default function Chatbot() {
 
     if (text.includes('contact') || text.includes('phone') || text.includes('email') || text.includes('address') || text.includes('location') || text.includes('map')) {
       return {
-        text: 'VMC Clinic is located at Karumalloor, Paravoor, Aluva. Phone: 9947653954, Email: vmcclinic@gmail.com. Open 24/7 for emergency care.',
+        text: 'VMC Clinic is located at Karumalloor, Paravoor, Aluva. Phone: 9633248480, Email: mail.vmcmedical@gmail.com. Open 24/7 for emergency care.',
         link: { label: 'Contact Us Page', href: '/contact' }
       };
     }
@@ -149,7 +149,7 @@ export default function Chatbot() {
     }
 
     return {
-      text: "I'm here to guide you with basic clinic information. For clinical enquiries, please call us directly at 9947653954. Use the buttons below or ask about booking, doctors, or departments!"
+      text: "I'm here to guide you with basic clinic information. For clinical enquiries, please call us directly at 9633248480. Use the buttons below or ask about booking, doctors, or departments!"
     };
   };
 

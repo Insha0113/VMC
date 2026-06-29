@@ -56,7 +56,7 @@ export default function DoctorCard({ doctor, compact = false }: DoctorCardProps)
         <div className={styles.actions}>
           <Link href={`/book?doctor=${doctor.id}&dept=${doctor.department}`} className={styles.bookBtn}>
             <Calendar size={16} />
-            Book Consult
+            Book Consultation
           </Link>
         </div>
       </div>

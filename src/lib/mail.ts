@@ -29,7 +29,7 @@ export async function sendNotificationEmail(
   data: any,
   type: 'booking' | 'enquiry'
 ): Promise<boolean> {
-  const recipient = 'inshanouri@gmail.com';
+  const recipient = process.env.NOTIFICATION_EMAIL || 'mail.vmcmedical@gmail.com';
   
   // SMTP credentials from environment
   const smtpHost = process.env.SMTP_HOST || '';
@@ -197,6 +197,108 @@ export async function sendNotificationEmail(
     return true;
   } catch (err) {
     console.error(`[SMTP ERROR] Failed to send email via SMTP:`, err);
+    return false;
+  }
+}
+
+export async function sendPatientConfirmationEmail(booking: any): Promise<boolean> {
+  const recipient = booking.patientEmail;
+  
+  // SMTP credentials from environment
+  const smtpHost = process.env.SMTP_HOST || '';
+  const smtpPort = parseInt(process.env.SMTP_PORT || '587', 10);
+  const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER || '';
+  const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_PASS || '';
+  const smtpSecure = process.env.SMTP_SECURE === 'true';
+
+  const subject = `✅ Appointment Confirmed at VMC Medical Center - ${booking.patientName}`;
+  
+  const htmlContent = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+      <div style="background-color: #043f65; padding: 20px; text-align: center; color: white;">
+        <h2 style="margin: 0; font-size: 24px; font-weight: bold; letter-spacing: 0.5px;">VMC Medical Center</h2>
+        <p style="margin: 5px 0 0 0; opacity: 0.8; font-size: 14px;">Appointment Confirmed</p>
+      </div>
+      <div style="padding: 25px; background-color: #ffffff; color: #333333; line-height: 1.6;">
+        <p style="font-size: 16px; margin-top: 0;">Dear ${booking.patientName},</p>
+        <p style="font-size: 15px;">We are pleased to inform you that your appointment request at VMC Medical Center has been **confirmed** by our administration team. Below are your appointment details:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; width: 140px; color: #4a5568;">Booking ID</td>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-family: monospace; font-weight: bold; color: #043f65;">${booking.id}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #4a5568;">Specialist</td>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #043f65;">${booking.doctorName}</td>
+          </tr>
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #4a5568;">Department</td>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; text-transform: uppercase;">${booking.department}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #4a5568;">Date</td>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold;">${booking.date}</td>
+          </tr>
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #4a5568;">Time Slot</td>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold;">${booking.time}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #4a5568;">Status</td>
+            <td style="padding: 10px; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #95c83e;">CONFIRMED</td>
+          </tr>
+        </table>
+        
+        <p style="font-size: 14px; color: #4a5568;">Please arrive 10-15 minutes prior to your scheduled time slot. If you need to reschedule or have any questions, feel free to contact us at <a href="tel:+919633248480" style="color: #0871b2; text-decoration: none;">+91 9633248480</a>.</p>
+        
+        <p style="font-size: 14px; color: #4a5568; margin-bottom: 0;">Thank you for choosing VMC Medical Center.</p>
+      </div>
+      <div style="background-color: #f7fafc; padding: 15px; text-align: center; border-top: 1px solid #edf2f7; color: #718096; font-size: 12px;">
+        This is an automated confirmation email from VMC Medical Center.<br/>
+        &copy; ${new Date().getFullYear()} VMC Medical Center. All rights reserved.
+      </div>
+    </div>
+  `;
+
+  // Check if SMTP is configured. If not, log to console
+  if (!smtpUser || !smtpPass) {
+    console.log(`\n======================================================`);
+    console.log(`[SMTP SIMULATOR] Patient Confirmation Email standard logger:`);
+    console.log(`To: ${recipient}`);
+    console.log(`Subject: ${subject}`);
+    console.log(`Body (Text-approximate):`);
+    console.log(`------------------------------------------------------`);
+    console.log(`Booking ID: ${booking.id}`);
+    console.log(`Patient: ${booking.patientName} (${booking.patientEmail})`);
+    console.log(`Doctor: ${booking.doctorName}`);
+    console.log(`Date/Time: ${booking.date} at ${booking.time}`);
+    console.log(`======================================================\n`);
+    return true;
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpSecure,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: `"VMC Medical Center" <${smtpUser}>`,
+      to: recipient,
+      subject: subject,
+      html: htmlContent,
+    });
+
+    console.log(`[SMTP SENDER] Patient confirmation email successfully sent to ${recipient}: ${info.messageId}`);
+    return true;
+  } catch (err) {
+    console.error(`[SMTP ERROR] Failed to send patient confirmation email:`, err);
     return false;
   }
 }

@@ -360,7 +360,7 @@ export default function BookingForm() {
               <li>Please arrive 15 minutes prior to your scheduled slot.</li>
               <li>Bring a valid ID card and past medical history / scan reports if any.</li>
               <li>A confirmation notice has been sent to <strong>{bookingResult.patientEmail}</strong>.</li>
-              <li>If you need to reschedule, call us at <a href="tel:9947653954" style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'underline' }}>9947653954</a>.</li>
+              <li>If you need to reschedule, call us at <a href="tel:9633248480" style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'underline' }}>9633248480</a>.</li>
             </ul>
           </div>
 

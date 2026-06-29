@@ -327,7 +327,7 @@ export default async function HomePage() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h4>Phone Number</h4>
-                    <p><a href="tel:9947653954" style={{ color: 'inherit', textDecoration: 'underline' }}>9947653954</a></p>
+                    <p><a href="tel:9633248480" style={{ color: 'inherit', textDecoration: 'underline' }}>9633248480</a></p>
                   </div>
                 </div>
 
@@ -337,7 +337,7 @@ export default async function HomePage() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h4>Email Address</h4>
-                    <p><a href="mailto:vmcclinic@gmail.com" style={{ color: 'inherit', textDecoration: 'underline' }}>vmcclinic@gmail.com</a></p>
+                    <p><a href="mailto:mail.vmcmedical@gmail.com" style={{ color: 'inherit', textDecoration: 'underline' }}>mail.vmcmedical@gmail.com</a></p>
                   </div>
                 </div>
 
@@ -368,7 +368,7 @@ export default async function HomePage() {
                   <span>How can I schedule a home doctor visit?</span>
                 </div>
                 <p className={styles.faqAnswer}>
-                  You can easily schedule a home visit by clicking "Book Service" at the top of the page, selecting "Home Visit", and choosing your preferred slot. Alternatively, call us at 9947653954 for immediate scheduling support.
+                  You can easily schedule a home visit by clicking "Book Service" at the top of the page, selecting "Home Visit", and choosing your preferred slot. Alternatively, call us at 9633248480 for immediate scheduling support.
                 </p>
               </div>
               <div className={styles.faqCard}>
